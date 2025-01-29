@@ -1,12 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import connectDb from './config/db';
-import dotenv from 'dotenv';
-dotenv.config();
+import { FE_DOMAIN, PORT } from './constants/env';
 
 const app = express();
 app.use(cors({
-    origin: process.env.FE_DOMAIN,
+    origin: FE_DOMAIN,
     credentials: true
 }))
 app.use(express.json());
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
 
 connectDb()
     .then(() => {
-        app.listen(process.env.PORT, () => {
-            console.log('server running on ' + process.env.PORT);
+        app.listen(PORT, () => {
+            console.log('server running on ' + PORT);
         })
     })
