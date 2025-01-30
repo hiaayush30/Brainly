@@ -6,7 +6,9 @@ import { JWT_SECRET } from "../constants/env";
 import { comparePassword, hashPassword } from "../util/bcrypt";
 import Content from "../models/Content";
 import Tag from "../models/Tag";
+import crypto from 'crypto';
 import Link from "../models/Link";
+import mongoose from "mongoose";
 
 const signupSchema = zod.object({
     username: zod.string()
@@ -120,32 +122,31 @@ export const addContent = async (req: Request, res: Response): Promise<any> => {
     const validBody = contentSchema.safeParse(req.body);
     if (!validBody.success) {
         return res.status(403).json({
-            message: 'invalid request body'
+            message: 'invalid request body',
+            error: validBody.error.format()
         })
     }
     try {
         const { type, link, title, tags } = validBody.data
-        const tagIds: Array<any> = [];
-        tags.forEach(async (tag) => {
-            const tagDocument = await Tag.findOne({ title: tag })
-            if (!tagDocument) {
-                const newTag = await Tag.create({
-                    title: tag
-                });
-                tagIds.push(newTag._id);
-            } else {
-                tagIds.push(tagDocument._id);
-            }
-        })
-        await Link.create({
-            hash: link,
-            userId: req.user?._id
-        })
+        const tagIds = await Promise.all(
+            tags.map(async (tag) => {
+                const tagDocument = await Tag.findOne({ title: tag })
+                if (!tagDocument) {
+                    const newTag = await Tag.create({
+                        title: tag
+                    });
+                    return newTag._id;
+                } else {
+                    return tagDocument._id;
+                }
+            })
+        )
         const content = await Content.create({
             type,
             link,
             title,
-            tags: tagIds
+            tags: tagIds,
+            userId: req.user?._id
         })
 
         return res.status(201).json({
@@ -197,9 +198,11 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
                 message: 'content not found'
             })
         }
-        await Link.deleteOne({
-            hash: content.link
-        })
+        if ( !content.userId.equals(req.user?._id)) {
+            return res.status(403).json({
+                message: 'not authorized to delete this post'
+            })
+        }
         await Content.deleteOne({ _id: id });
         return res.status(200).json({
             message: 'content deleted'
@@ -207,6 +210,89 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
 
     } catch (error) {
         console.error('error in deleting content:' + error);
+        return res.status(500).json({
+            message: 'internal server error'
+        })
+    }
+}
+
+
+const shareSchema = zod.object({
+    share: zod.boolean()
+})
+export const share = async (req: Request, res: Response): Promise<any> => {
+    if (!shareSchema.safeParse(req.body).success) {
+        return res.status(403).json({
+            message: 'invalid request'
+        })
+    }
+    try {
+        if (req.body.share) {
+            const hash = req.user?.username + crypto.randomBytes(8).toString('hex');
+            const link = await Link.create({
+                hash,
+                userId: req.user?._id
+            });
+            return res.status(201).json({
+                message: 'sharable link created successfully',
+                link: link.hash
+            })
+        }
+        else {
+            await Link.deleteMany({
+                userId: req.user?._id
+            });
+            return res.status(200).json({
+                message: 'sharable link removed successfully'
+            })
+        }
+    } catch (error) {
+        console.error('error in sharing link:' + error);
+        return res.status(500).json({
+            message: 'internal server error'
+        })
+    }
+}
+
+export const getSharedContent = async (req: Request, res: Response): Promise<any> => {
+    if (!req.params.shareLink) {
+        return res.status(403).json({
+            message: 'invalid request'
+        })
+    }
+    try {
+        const shareLink = req.params.shareLink;
+        const link = await Link.findOne({
+            hash: shareLink
+        });
+        if (!link) {
+            return res.status(404).json({
+                message: 'link not found or disabled'
+            })
+        }
+        const user = await User.findOne({
+            _id: link.userId
+        }).select('username');
+        if (!user) {
+            return res.status(400).json({
+                message: 'user not found'
+            })
+        }
+        const content = await Content.find({
+            userId: link.userId
+        })
+            .populate('tags')
+            .populate({
+                path: 'userId',
+                select: 'username'
+            })
+        return res.status(200).json({
+            message: 'content fetched successfully',
+            username: user.username,
+            content
+        })
+    } catch (error) {
+        console.error('error in fetching shared data ' + error);
         return res.status(500).json({
             message: 'internal server error'
         })

@@ -34,7 +34,7 @@ const contentSchema = new mongoose.Schema<ContentType>({
 })
 
 contentSchema.pre('save',async function (next) {
-    const user = await User.findById(this._id);
+    const user = await User.findById(this.userId);
     if(!user){
         throw new Error('user does not exist');
     }

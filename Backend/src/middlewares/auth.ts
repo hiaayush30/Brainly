@@ -2,10 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from "../constants/env";
 import { User } from "../models/User";
-import { Document, Types } from "mongoose";
+import { Types } from "mongoose";
 
 // Extend Request type to include `user`
-interface UserType extends Document {
+interface UserType{
+    _id:Types.ObjectId,
     username:string,
 }
 declare module "express-serve-static-core" {
@@ -29,7 +30,10 @@ export const auth = async (req: Request, res: Response, next: NextFunction):Prom
                 message:'user not found'
             })
         }
-        req.user = user;
+        req.user = {
+            _id:user._id as Types.ObjectId,
+            username:user.username
+        };
         next();
     } catch (error) {
         console.log('error in auth' + error);
