@@ -4,19 +4,16 @@ import express from 'express';
 import cors from 'cors';
 import connectDb from './config/db';
 import { FE_DOMAIN, PORT } from './constants/env';
+import userRouter from './routes/user';
 
 const app = express();
 app.use(cors({
     origin: FE_DOMAIN,
-    credentials: true
+    credentials: true 
 }))
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'we are on'
-    })
-})
+app.use('/api/v1',userRouter);
 
 connectDb()
     .then(() => {
