@@ -8,7 +8,6 @@ import Content from "../models/Content";
 import Tag from "../models/Tag";
 import crypto from 'crypto';
 import Link from "../models/Link";
-import mongoose from "mongoose";
 
 const signupSchema = zod.object({
     username: zod.string()
@@ -128,16 +127,17 @@ export const addContent = async (req: Request, res: Response): Promise<any> => {
     }
     try {
         const { type, link, title, tags } = validBody.data
+        const createdTags = await Tag.find();
         const tagIds = await Promise.all(
             tags.map(async (tag) => {
-                const tagDocument = await Tag.findOne({ title: tag })
-                if (!tagDocument) {
+                const existingTag = createdTags.find(doc => doc.title == tag);
+                if (!existingTag) {
                     const newTag = await Tag.create({
                         title: tag
                     });
                     return newTag._id;
                 } else {
-                    return tagDocument._id;
+                    return existingTag._id;
                 }
             })
         )
@@ -164,18 +164,36 @@ export const addContent = async (req: Request, res: Response): Promise<any> => {
 
 export const getContent = async (req: Request, res: Response): Promise<any> => {
     try {
-        const content = await Content.find({
-            userId: req.user?._id
-        })
-            .populate('tags')
-            .populate({
-                path: 'userId',
-                select: '-password'
-            });
-        return res.status(200).json({
-            message: 'content fetched succefully',
-            content
-        })
+        const { page, limit } = req.query;
+        if (!page || !limit) {
+            const content = await Content.find({
+                userId: req.user?._id
+            })
+                .populate('tags')
+                .populate({
+                    path: 'userId',
+                    select: '-password'
+                });
+            return res.status(200).json({
+                message: 'content fetched succefully',
+                content
+            })
+        } else {
+            const skip = (Number(page) - 1) * Number(limit);
+            const content = await Content.find({
+                userId: req.user?._id
+            })
+                .populate({
+                    path: 'userId',
+                    select: '-password'
+                })
+                .limit(Number(limit))
+                .skip(skip)
+            return res.status(200).json({
+                message: 'content fetched succefully',
+                content
+            })
+        }
     } catch (error) {
         console.error('error in fetching data' + error);
         return res.status(500).json({
@@ -198,12 +216,10 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
                 message: 'content not found'
             })
         }
-        if ( !content.userId.equals(req.user?._id)) {
-            return res.status(403).json({
-                message: 'not authorized to delete this post'
-            })
-        }
-        await Content.deleteOne({ _id: id });
+        await Content.deleteOne({ 
+            _id: id,
+            userId:req.user?._id
+         });
         return res.status(200).json({
             message: 'content deleted'
         })
@@ -243,7 +259,7 @@ export const share = async (req: Request, res: Response): Promise<any> => {
                 userId: req.user?._id
             });
             return res.status(200).json({
-                message: 'sharable link removed successfully'
+                message: 'sharable links removed successfully'
             })
         }
     } catch (error) {
@@ -262,33 +278,28 @@ export const getSharedContent = async (req: Request, res: Response): Promise<any
     }
     try {
         const shareLink = req.params.shareLink;
+        type UserType = {
+            username: string
+        }
         const link = await Link.findOne({
             hash: shareLink
-        });
+        })
+            .populate<{ userId: UserType }>({
+                path: 'userId',
+                select: '-password'
+            });
         if (!link) {
             return res.status(404).json({
                 message: 'link not found or disabled'
-            })
-        }
-        const user = await User.findOne({
-            _id: link.userId
-        }).select('username');
-        if (!user) {
-            return res.status(400).json({
-                message: 'user not found'
             })
         }
         const content = await Content.find({
             userId: link.userId
         })
             .populate('tags')
-            .populate({
-                path: 'userId',
-                select: 'username'
-            })
         return res.status(200).json({
             message: 'content fetched successfully',
-            username: user.username,
+            username: link.userId.username,
             content
         })
     } catch (error) {

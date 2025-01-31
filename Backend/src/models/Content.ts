@@ -20,7 +20,8 @@ const contentSchema = new mongoose.Schema<ContentType>({
     },
     type:{
         type:String,
-        required:true
+        required:true,
+        enum:['document','tweet','youtube','link']
     },
     tags:[{
         type:mongoose.Schema.Types.ObjectId,
@@ -31,7 +32,7 @@ const contentSchema = new mongoose.Schema<ContentType>({
         ref:'User',
         required:true,
     }
-})
+},{timestamps:true})
 
 contentSchema.pre('save',async function (next) {
     const user = await User.findById(this.userId);
