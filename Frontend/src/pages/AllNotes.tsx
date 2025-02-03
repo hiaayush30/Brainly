@@ -1,5 +1,5 @@
-import Header from '../components/Home/Header'
-import Card from '../components/Home/Card'
+import Header from '../components/AllNotes/Header'
+import Card from '../components/AllNotes/Card'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,6 +40,8 @@ const AllNotes = () => {
                     tags={content.tags.map(tag=>tag.title)}/>
                 })}
             </div>
+            {content.length ==0 && <div className='text-slate-600 text-center'
+                >No content added yet !</div>}
         </>
     )
 }

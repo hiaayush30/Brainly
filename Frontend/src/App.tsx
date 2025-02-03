@@ -14,6 +14,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { addMeInfo } from './redux/features/service/serviceSlice'
+import Collections from './pages/Collections'
 
 const App = () => {
   const { me } = useSelector((state: RootState) => state.service)
@@ -47,6 +48,7 @@ const App = () => {
           <Route path='videos' element={<Videos />} />
           <Route path='links' element={<Links />} />
           <Route path='documents' element={<Documents />} />
+          <Route path='collections' element={<Collections />} />
         </Route>
         <Route path='*' element={<ErrorPage />} />
       </Routes> : <Routes>

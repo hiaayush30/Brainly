@@ -1,15 +1,15 @@
 import { FiTwitter } from "react-icons/fi";
-import { AiOutlineYoutube } from "react-icons/ai";
+import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { GoHash } from "react-icons/go";
 import { LuBrain } from "react-icons/lu";
-import { FaGithub } from "react-icons/fa";
+import { FaFire, FaGithub, FaRegFolderOpen } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "./Ui/Button";
 
 const Sidebar = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     return (
         <div className='w-[25%] bg-slate-200 relative max-sm:hidden'>
             <div className='p-10 flex gap-3'>
@@ -25,6 +25,13 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className='flex flex-col justify-start items-start px-10 text-xl'>
+                <NavLink to={'/collections'} className={({ isActive }) =>
+                    `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                }>
+                    <FaRegFolderOpen />
+                    <p>Collections</p>
+                    <AiFillFire color="red"/>
+                </NavLink>
                 <NavLink to={'/tweets'} className={({ isActive }) =>
                     `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                 }>
@@ -49,16 +56,12 @@ const Sidebar = () => {
                     <IoMdLink />
                     <p>Links</p>
                 </NavLink>
-                <div className='flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold'>
-                    <GoHash />
-                    <p>Tags</p>
-                </div>
-                <button onClick={()=>{
+                <button onClick={() => {
                     localStorage.removeItem('token');
-                    window.location.reload(); 
+                    window.location.reload();
                 }}
-                className='flex text-red-600 items-center gap-3 m-3 cursor-pointer transition-all'>
-                    <IoIosLogOut/>
+                    className='flex text-red-600 items-center gap-3 m-3 cursor-pointer transition-all'>
+                    <IoIosLogOut />
                     <p>Logout</p>
                 </button>
             </div>

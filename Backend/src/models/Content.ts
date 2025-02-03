@@ -44,5 +44,5 @@ contentSchema.pre('save',async function (next) {
     }
 })
 
-const Content = mongoose.model<ContentType>('content',contentSchema);
+const Content = mongoose.model<ContentType>('Content',contentSchema);
 export default Content;

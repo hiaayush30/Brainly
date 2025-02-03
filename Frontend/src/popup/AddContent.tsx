@@ -35,7 +35,7 @@ const AddContent = () => {
           type:selectedType,
           link,
           title,
-          tags:tags.split(' ')
+          tags:tags.trim().split(' ')
         },{
           headers:{
             "Authorization":localStorage.getItem('token')
