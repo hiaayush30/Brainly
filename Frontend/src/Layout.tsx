@@ -3,7 +3,7 @@ import Card from './components/Home/Card'
 import Header from './components/Home/Header'
 import Sidebar from './components/Sidebar'
 
-const Home = () => {
+const Layout = () => {
   return (
     <div className='flex w-screen min-h-screen bg-slate-300'>
       <Sidebar/>
@@ -14,4 +14,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Layout

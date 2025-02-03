@@ -10,7 +10,8 @@ import cookieParser from 'cookie-parser';
 const app = express();
 app.use(cors({
     origin: FE_DOMAIN,
-    credentials: true 
+    credentials: true,
+    allowedHeaders:['authorization','content-type'] 
 }))
 app.use(express.json());
 app.use(cookieParser());

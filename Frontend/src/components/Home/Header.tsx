@@ -5,9 +5,14 @@ import Button from "../Ui/Button";
 import ShareBrain from "../../popup/ShareBrain";
 import { useState } from "react";
 import { FaBookBookmark } from "react-icons/fa6";
+import AddContent from "../../popup/AddContent";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAddContent, toggleShareBrain } from "../../redux/features/service/serviceSlice";
+import { RootState } from "../../redux/store";
 
 const Header = () => {
-    const [openShareContentModal, setOpenShareContentModal] = useState<boolean>(false);
+    const {openAddContent,openShareBrain} = useSelector((store:RootState)=>store.service);
+    const dispatch=useDispatch();
     return (
         <div className="flex w-full justify-between px-10 py-6 items-center">
             {/* <RxHamburgerMenu className="absolute top-1 left-1 sm:hidden cursor-pointer text-2xl" /> */}
@@ -17,17 +22,19 @@ const Header = () => {
                 <FaBookBookmark className="text-2xl text-blue-800" />
             </div>
             <div className="flex gap-5 p-2 max-sm:gap-2">
-                <button onClick={() => setOpenShareContentModal(true)}
+                <button onClick={() => dispatch(toggleShareBrain(true))}
                     className='cursor-pointer hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg'>
                     <BsShare />
                     <p className="max-sm:hidden">Share Brain</p>
                 </button>
-                <button className="cursor-pointer hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg">
+                <button onClick={() => dispatch(toggleAddContent(true))}
+                className="cursor-pointer hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg">
                     <FaPlus />
                     <p className="max-sm:hidden">Add Content</p>
                 </button>
             </div>
-            {openShareContentModal && <ShareBrain setOpenShareContentModal={setOpenShareContentModal} />}
+            {openShareBrain && <ShareBrain/>}
+            {openAddContent && <AddContent/>}
         </div>
     )
 }

@@ -45,17 +45,17 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
         })
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             audience: ['User'],
-            expiresIn: '1h'
+            expiresIn: '24h'
         });
-        res.cookie('token', token, {
-            path: '/',
-            expires: new Date(Date.now() + 3600000),
-            httpOnly: true
-        })
-        return res.status(201).json({
-            message: 'user created succesfully!',
-            user
-        })
+        return res
+            .status(201).json({
+                message: 'user created succesfully!',
+                token,
+                user:{
+                    username:user.username,
+                    _id:user._id
+                }
+            })
     } catch (error) {
         console.log('signup error' + error);
         return res.status(500).json({
@@ -91,16 +91,15 @@ export const login = async (req: Request, res: Response): Promise<any> => {
         }
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             audience: ['User'],
-            expiresIn: '1h'
+            expiresIn: '24h'
         });
-        res.cookie('token', token, {
-            path: '/',
-            expires: new Date(Date.now() + 3600000),
-            httpOnly: true
-        })
         return res.status(200).json({
             message: 'user logged in succesfully!',
-            user
+            user: {
+                _id: user._id,
+                username: user.username,
+            },
+            token
         })
     } catch (error) {
         console.log('signup error' + error);
@@ -116,6 +115,9 @@ const contentSchema = zod.object({
     link: zod.string().url(),
     title: zod.string().min(3).max(50),
     tags: zod.array(zod.string().toLowerCase().min(1).max(20)).max(5).min(1)
+        .refine((tags) => new Set(tags).size === tags.length, {
+            message: 'Tags must be unique'
+        })
 })
 export const addContent = async (req: Request, res: Response): Promise<any> => {
     const validBody = contentSchema.safeParse(req.body);
@@ -148,7 +150,7 @@ export const addContent = async (req: Request, res: Response): Promise<any> => {
             tags: tagIds,
             userId: req.user?._id
         })
-
+        await content.populate(['tags','userId']);
         return res.status(201).json({
             message: 'content added successfully!',
             content
@@ -162,6 +164,13 @@ export const addContent = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+export const myInfo = async (req: Request, res: Response): Promise<any> => {
+    return res.status(200).json({
+        message: 'authenticated successfully!',
+        user: req.user
+    })
+}
+
 export const getContent = async (req: Request, res: Response): Promise<any> => {
     try {
         const { page, limit } = req.query;
@@ -169,6 +178,7 @@ export const getContent = async (req: Request, res: Response): Promise<any> => {
             const content = await Content.find({
                 userId: req.user?._id
             })
+                .sort({ 'createdAt': -1 })
                 .populate('tags')
                 .populate({
                     path: 'userId',
@@ -187,6 +197,7 @@ export const getContent = async (req: Request, res: Response): Promise<any> => {
                     path: 'userId',
                     select: '-password'
                 })
+                .sort({ 'createdAt': -1 })
                 .limit(Number(limit))
                 .skip(skip)
             return res.status(200).json({
@@ -216,10 +227,10 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
                 message: 'content not found'
             })
         }
-        await Content.deleteOne({ 
+        await Content.deleteOne({
             _id: id,
-            userId:req.user?._id
-         });
+            userId: req.user?._id
+        });
         return res.status(200).json({
             message: 'content deleted'
         })
