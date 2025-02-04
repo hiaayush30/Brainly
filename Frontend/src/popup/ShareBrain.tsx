@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { MdContentCopy } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ const ShareBrain = () => {
             });
             const sharable=import.meta.env.VITE_BE_DOMAIN+'brain/'+res.data.link;
             window.navigator.clipboard.writeText(sharable);  //wrap in try-catch
+            if(!btnRef.current) return;
             btnRef.current.innerHTML='Link Copied!'
             btnRef.current.style.backgroundColor='green';
         } catch (error) {

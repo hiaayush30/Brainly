@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Meta } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Layout from './Layout'
 import ErrorPage from './pages/ErrorPage'
 import AllNotes from './pages/AllNotes'
@@ -8,7 +8,7 @@ import Links from './pages/Links'
 import Documents from './pages/Documents'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Landing from './pages/Landing'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,7 +40,7 @@ const App = () => {
       }
     };
     checkAuth();
-  }, []);
+  }, [dispatch]);
   return (
     <BrowserRouter>
       {me ? <Routes>

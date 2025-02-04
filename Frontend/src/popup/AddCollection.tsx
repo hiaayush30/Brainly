@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch} from 'react-redux'
 import CloseIcon from '../components/icons/CloseIcon';
 import { toggleAddCollection } from '../redux/features/service/serviceSlice';
 import axios from 'axios';
@@ -14,7 +13,8 @@ const AddCollection = () => {
     inputRef.current?.focus();
   }, [])
   const handleSubmit = async () => {
-    if (inputRef.current?.value.trim().length < 3 || inputRef.current?.value.trim().length >15) {
+    if(!inputRef.current) return;
+    if (inputRef.current.value.trim().length < 3 || inputRef.current.value.trim().length >15) {
       return alert('name should be between 3 and 15 characters!')
     }
     setLoading(true);

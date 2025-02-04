@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
 import { RootState } from '../redux/store';
 import { Collection, deleteCollection } from '../redux/features/collection/collectionSlice';
-import Card from '../components/Card';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import axios from 'axios';
@@ -20,11 +19,11 @@ const Folder = () => {
             .find((collection) => collection._id == collectionId);
         if (!folder) {
             navigate('/collections');
-        }
-        setCollection(folder);
+        }else setCollection(folder);
     }, [collectionId, collections, navigate])
     const handleDelete = async () => {
         try {
+            if(!collectionId) return;
             await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'collection/' + collectionId, {
                 headers: {
                     'Authorization': localStorage.getItem('token')

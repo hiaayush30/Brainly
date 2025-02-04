@@ -2,14 +2,12 @@ import { FaPlus, FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { IoDocument, IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
-import { BsShare } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaLink } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteContent } from "../redux/features/content/contentSlice";
-import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 
 interface CardProps {
@@ -26,7 +24,7 @@ const Card = (props: CardProps) => {
     const dispatch = useDispatch();
     const handleDelete = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'content', {
+            await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'content', {
                 data: { contentId: props.id },
                 headers: {
                     'Authorization': localStorage.getItem('token')

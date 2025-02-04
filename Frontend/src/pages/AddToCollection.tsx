@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
 import { RootState } from '../redux/store';
-import { Content, setContent } from '../redux/features/content/contentSlice';
+import { Content } from '../redux/features/content/contentSlice';
 import { BsLink, BsTwitter, BsYoutube } from 'react-icons/bs';
 import { FcDocument } from 'react-icons/fc';
-import { addContentToCollection, Collection, setCollection } from '../redux/features/collection/collectionSlice';
+import { addContentToCollection, Collection } from '../redux/features/collection/collectionSlice';
 import axios from 'axios';
 
 const AddToCollection = () => {
@@ -14,14 +14,14 @@ const AddToCollection = () => {
   const { contentId } = useParams();
   const contents = useSelector((state: RootState) => state.content)
   const collections = useSelector((state: RootState) => state.collection)
-  const [content, setContent] = useState<Content>(null);
-  const [targetCollection, setTargetCollection] = useState<Collection | null>(null);
+  const [content, setContent] = useState<Content|null>(null);
+  const [targetCollection, setTargetCollection] = useState<Collection | null | undefined>(null);
 
   useEffect(() => {
     const result = contents.find(content => content._id == contentId);
     if (result) setContent(result);
     else navigate('/')
-  }, [contentId, contents])
+  }, [contentId, contents,navigate])
 
   const handleSubmit = async () => {
     if (!targetCollection) return alert('Please select a folder first!');
@@ -29,7 +29,8 @@ const AddToCollection = () => {
      return alert('content already present in the selected folder!');
     }
     try {
-      const res = await axios.post(import.meta.env.VITE_BE_DOMAIN+'collection/add',{
+      if(!content) return;
+      await axios.post(import.meta.env.VITE_BE_DOMAIN+'collection/add',{
         collectionId:targetCollection._id,
         content:contentId
       },{
@@ -58,7 +59,7 @@ const AddToCollection = () => {
       >Add to Collection</h1>
       <div className=''>
         {/* Card */}
-        <div className={`${ContentBg[content?.type]}`}>
+        <div className={`${content ? ContentBg[content.type]:''}`}>
           <div className='flex items-center gap-5 p-5'>
             {content?.type == 'youtube' && <BsYoutube color='red' size={32} />}
             {content?.type == 'tweet' && <BsTwitter color='#1C96E8' size={32} />}

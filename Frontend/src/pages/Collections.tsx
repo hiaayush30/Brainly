@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import AddFolderIcon from '../components/icons/AddFolderIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
@@ -7,7 +7,6 @@ import AddCollection from '../popup/AddCollection'
 import axios from 'axios'
 import { setCollection } from '../redux/features/collection/collectionSlice'
 import { useNavigate } from 'react-router-dom'
-import { IoMdFolderOpen } from "react-icons/io";
 import { IoFolder } from 'react-icons/io5'
 
 const Collections = () => {
@@ -29,7 +28,7 @@ const Collections = () => {
       }
     }
     fetchCollections();
-  }, [])
+  }, [dispatch])
   return (
     <div className='w-full min-h-screen'>
       <h1 className='text-center text-2xl m-5 font-semibold'

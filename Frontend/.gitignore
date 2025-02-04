@@ -1,3 +1,4 @@
+./src/redux/api.ts
 # Logs
 logs
 *.log

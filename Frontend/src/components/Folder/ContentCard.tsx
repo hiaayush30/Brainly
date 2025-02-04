@@ -2,14 +2,12 @@ import { FaPlus, FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
-import { BsShare } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaLink } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteContent } from "../../redux/features/content/contentSlice";
 import { removeContentFromCollection } from "../../redux/features/collection/collectionSlice";
 
 interface CardProps {
@@ -28,7 +26,7 @@ const ContentCard = (props: CardProps) => {
     const handleDelete = async () => {
         try {
             if (!props.collectionId) return;
-            const res = await axios.post(import.meta.env.VITE_BE_DOMAIN + 'collection/add', {
+            await axios.post(import.meta.env.VITE_BE_DOMAIN + 'collection/add', {
                 collectionId: props.collectionId,
                 content: props.id
             }, {

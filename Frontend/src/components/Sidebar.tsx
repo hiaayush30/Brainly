@@ -2,14 +2,11 @@ import { FiTwitter } from "react-icons/fi";
 import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
-import { GoHash } from "react-icons/go";
 import { LuBrain } from "react-icons/lu";
-import { FaFire, FaGithub, FaRegFolderOpen } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Button } from "./Ui/Button";
+import { FaGithub, FaRegFolderOpen } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-    const navigate = useNavigate();
     return (
         <div className='w-[25%] bg-slate-200 relative max-sm:hidden'>
             <div className='p-10 flex gap-3'>

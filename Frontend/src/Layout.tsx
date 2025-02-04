@@ -1,6 +1,4 @@
 import { Outlet } from 'react-router-dom'
-import Card from './components/Card'
-import Header from './components/AllNotes/Header'
 import Sidebar from './components/Sidebar'
 
 const Layout = () => {

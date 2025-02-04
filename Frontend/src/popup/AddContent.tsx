@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { IoAddOutline } from "react-icons/io5";
 import { useDispatch } from 'react-redux';

@@ -1,10 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useForm, Resolver, useFormState } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useForm, Resolver} from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../redux/store';
 import { addMeInfo } from '../redux/features/service/serviceSlice';
 
 type FormValues = {

@@ -1,9 +1,6 @@
 import { BsShare } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
-import { RxHamburgerMenu } from "react-icons/rx";
-import Button from "../Ui/Button";
 import ShareBrain from "../../popup/ShareBrain";
-import { useState } from "react";
 import { FaBookBookmark } from "react-icons/fa6";
 import AddContent from "../../popup/AddContent";
 import { useDispatch, useSelector } from "react-redux";
