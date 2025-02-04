@@ -1,16 +1,16 @@
 import { FaPlus, FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import { IoDocument, IoDocumentTextOutline } from "react-icons/io5";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
 import { BsShare } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaLink } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteContent } from "../redux/features/content/contentSlice";
-import { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteContent } from "../../redux/features/content/contentSlice";
+import { removeContentFromCollection } from "../../redux/features/collection/collectionSlice";
 
 interface CardProps {
     id: string;
@@ -19,27 +19,32 @@ interface CardProps {
     title: string;
     tags: Array<string>;
     createdAt: Date;
+    collectionId?: string;
 }
 
-const Card = (props: CardProps) => {
+const ContentCard = (props: CardProps) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDelete = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'content', {
-                data: { contentId: props.id },
+            if (!props.collectionId) return;
+            const res = await axios.post(import.meta.env.VITE_BE_DOMAIN + 'collection/add', {
+                collectionId: props.collectionId,
+                content: props.id
+            }, {
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }
             })
-            dispatch(deleteContent(props.id))
+            alert('content removed')
+            dispatch(removeContentFromCollection({ collectionId: props.collectionId, contentId: props.id }))
         } catch (error) {
             console.log(error)
         }
     }
     const getYoutubeEmbedUrl = (url: string) => {
-        // const url = "https://youtu.be/5FQYwKq-VaE?si=cdGh_3C3mbQt4DzK";
-        const id = url.split("youtu.be/")[1]; 
+        // const url = "https://www.youtube.com/watch?v=sGbxmsDFVnE";
+        const id = url.split("?v=")[1]; //sGbxmsDFVnE
         return "http://www.youtube.com/embed/" + id;
     }
 
@@ -85,13 +90,6 @@ const Card = (props: CardProps) => {
                         <button className="mx-auto my-5 cursor-pointer flex items-center bg-blue-500 hover:bg-blue-400 p-1 rounded-md text-white"
                             onClick={() => window.open(props.link)}><MdArrowOutward />Open</button>
                     </div>}
-                {props.type == 'document' &&
-                    <div className="max-w-[90%] overflow-clip">
-                        <IoDocument size={32} className="mx-auto" />
-                        <input type="text" disabled={true} value={props.link} />
-                        <button className="mx-auto my-5 cursor-pointer flex items-center bg-blue-500 hover:bg-blue-400 p-1 rounded-md text-white"
-                            onClick={() => window.open(props.link)}><MdArrowOutward />Open</button>
-                    </div>}
             </div>
             <div className="font-light text-sm text-purple-800 p-1 flex flex-wrap gap-2">
                 {props.tags.map((tag) => {
@@ -115,4 +113,4 @@ const Card = (props: CardProps) => {
     )
 }
 
-export default Card
+export default ContentCard

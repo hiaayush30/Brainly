@@ -44,11 +44,18 @@ export const collectionSlice = createSlice({
                     collection.content.push(action.payload.content)
                 }
             })
+        },
+        removeContentFromCollection:(state,action:PayloadAction<{collectionId:string,contentId:string}>)=>{
+            state.forEach((collection)=>{
+                if(collection._id==action.payload.collectionId){
+                    collection.content=collection.content.filter(content=>content._id!=action.payload.contentId);
+                }
+            })
         }
     },
 })
 
 // Action creators are generated for each case reducer function   
-export const { addCollection,addContentToCollection, deleteCollection,setCollection } = collectionSlice.actions
+export const { addCollection,removeContentFromCollection, addContentToCollection, deleteCollection,setCollection } = collectionSlice.actions
 
 export default collectionSlice.reducer

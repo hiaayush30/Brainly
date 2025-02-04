@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import axios from 'axios';
+import ContentCard from '../components/Folder/ContentCard';
 
 const Folder = () => {
     const { collectionId } = useParams();
@@ -51,7 +52,8 @@ const Folder = () => {
             </div>
             <div className='p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
                 {collection?.content.map(content => {
-                    return <Card key={content._id}
+                    return <ContentCard key={content._id}
+                        collectionId={collectionId}
                         id={content._id}
                         createdAt={content.createdAt}
                         link={content.link}
@@ -61,7 +63,12 @@ const Folder = () => {
                 })}
             </div>
             {collection?.content.length == 0 && <div className='text-slate-600 w-full text-center'
-            >No Content in this folder!</div>}
+            >
+                <div>No Content in this folder!</div>
+                <div className='pt-4'>Click on the + icon of the content you want to add and select your preferred collection</div>
+                <button onClick={()=>navigate('/')}
+                className='mt-4 text-white bg-blue-600 p-1 rounded-md hover:bg-blue-500 cursor-pointer'>Add Now!</button>
+                </div>}
         </div>
     )
 }
