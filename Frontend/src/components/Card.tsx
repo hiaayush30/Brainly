@@ -21,7 +21,7 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-    const [loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDelete = async () => {
