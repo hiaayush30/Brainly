@@ -1,4 +1,4 @@
-import { FaPlus, FaTwitter } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
@@ -7,8 +7,8 @@ import { FaLink } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { removeContentFromCollection } from "../../redux/features/collection/collectionSlice";
+import { useState } from "react";
 
 interface CardProps {
     id: string;
@@ -21,11 +21,13 @@ interface CardProps {
 }
 
 const ContentCard = (props: CardProps) => {
-    const navigate = useNavigate();
+    const[loading,setLoading] = useState(false);
     const dispatch = useDispatch();
     const handleDelete = async () => {
+        if(loading) return;
         try {
             if (!props.collectionId) return;
+            setLoading(true);
             await axios.post(import.meta.env.VITE_BE_DOMAIN + 'collection/add', {
                 collectionId: props.collectionId,
                 content: props.id
@@ -36,8 +38,10 @@ const ContentCard = (props: CardProps) => {
             })
             alert('content removed')
             dispatch(removeContentFromCollection({ collectionId: props.collectionId, contentId: props.id }))
+            setLoading(false);
         } catch (error) {
             console.log(error)
+            setLoading(false);
         }
     }
     const getYoutubeEmbedUrl = (url: string) => {
@@ -62,8 +66,6 @@ const ContentCard = (props: CardProps) => {
                     >{props.title}</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <FaPlus onClick={() => navigate('/add/' + props.id)}
-                        title="Add to Collection" className="hover:scale-110 hover:text-blue-800 transition-all cursor-pointer" />
                     <RiDeleteBin6Line onClick={handleDelete}
                         title="delete" className="hover:scale-110 hover:text-red-700 transition-all cursor-pointer" />
                 </div>

@@ -1,16 +1,18 @@
-import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
-import Card from '../components/Card';
 
-const Documents = () => {
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+import Card from '../../components/Card';
+
+const Links = () => {
   const content = useSelector((state:RootState)=>state.content);
-  const docs = content.filter(content=>content.type=='document');
+  console.log(content);
+  const links = content.filter(content=>content.type=='link');
   return (
     <div className='w-full'>
       <h1 className='text-2xl p-5'
-      >Saved Documents</h1>
+      >Saved Links</h1>
       <div className='p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
-      {docs.map(content => {
+      {links.map(content => {
         return <Card key={content._id}
           id={content._id}
           createdAt={content.createdAt}
@@ -19,11 +21,11 @@ const Documents = () => {
           type={content.type}
           tags={content.tags.map(tag => tag.title)} />
       })}
-      {docs.length==0 && <div className='text-slate-600 w-full text-center'
-      >No saved Docs!</div>}
+      {links.length==0 && <div className='text-slate-600 w-full text-center'
+      >No saved links!</div>}
     </div>
     </div>
   )
 }
 
-export default Documents
+export default Links

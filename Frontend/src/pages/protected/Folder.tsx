@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import { RootState } from '../redux/store';
-import { Collection, deleteCollection } from '../redux/features/collection/collectionSlice';
+import { RootState } from '../../redux/store';
+import { Collection, deleteCollection } from '../../redux/features/collection/collectionSlice';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import axios from 'axios';
-import ContentCard from '../components/Folder/ContentCard';
+import ContentCard from '../../components/Folder/ContentCard';
 
 const Folder = () => {
     const { collectionId } = useParams();
@@ -14,6 +14,7 @@ const Folder = () => {
     const collections = useSelector((state: RootState) => state.collection);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading,setLoading] = useState(false);
     useEffect(() => {
         const folder = collections
             .find((collection) => collection._id == collectionId);
@@ -22,17 +23,21 @@ const Folder = () => {
         }else setCollection(folder);
     }, [collectionId, collections, navigate])
     const handleDelete = async () => {
+        if(loading) return;
         try {
             if(!collectionId) return;
+            setLoading(true);
             await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'collection/' + collectionId, {
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }
             })
             dispatch(deleteCollection(collectionId));
+            setLoading(false);
             navigate('/collections')
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     }
     return (

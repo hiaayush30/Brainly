@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { deleteContent } from "../redux/features/content/contentSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface CardProps {
     id: string;
@@ -20,10 +21,13 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
+    const [loading,setLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDelete = async () => {
+        if(loading) return;
         try {
+            setLoading(true);
             await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'content', {
                 data: { contentId: props.id },
                 headers: {
@@ -31,8 +35,10 @@ const Card = (props: CardProps) => {
                 }
             })
             dispatch(deleteContent(props.id))
+            setLoading(false);
         } catch (error) {
             console.log(error)
+            setLoading(false);
         }
     }
     const getYoutubeEmbedUrl = (url: string) => {

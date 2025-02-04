@@ -1,10 +1,10 @@
-import Header from '../components/AllNotes/Header'
-import Card from '../components/Card'
+import Header from '../../components/AllNotes/Header'
+import Card from '../../components/Card'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setContent } from '../redux/features/content/contentSlice'
-import { RootState } from '../redux/store'
+import { setContent } from '../../redux/features/content/contentSlice'
+import { RootState } from '../../redux/store'
 
 const AllNotes = () => {
     const dispatch = useDispatch();

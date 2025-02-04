@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
-import Card from '../components/Card';
+import { RootState } from '../../redux/store'
+import Card from '../../components/Card';
 
 const Tweets = () => {
   const content = useSelector((state:RootState)=>state.content);

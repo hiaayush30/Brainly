@@ -1,48 +1,52 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import { RootState } from '../redux/store';
-import { Content } from '../redux/features/content/contentSlice';
+import { RootState } from '../../redux/store';
+import { Content } from '../../redux/features/content/contentSlice';
 import { BsLink, BsTwitter, BsYoutube } from 'react-icons/bs';
 import { FcDocument } from 'react-icons/fc';
-import { addContentToCollection, Collection } from '../redux/features/collection/collectionSlice';
+import { addContentToCollection, Collection } from '../../redux/features/collection/collectionSlice';
 import axios from 'axios';
 
 const AddToCollection = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { contentId } = useParams();
   const contents = useSelector((state: RootState) => state.content)
   const collections = useSelector((state: RootState) => state.collection)
-  const [content, setContent] = useState<Content|null>(null);
+  const [content, setContent] = useState<Content | null>(null);
   const [targetCollection, setTargetCollection] = useState<Collection | null | undefined>(null);
 
   useEffect(() => {
     const result = contents.find(content => content._id == contentId);
     if (result) setContent(result);
     else navigate('/')
-  }, [contentId, contents,navigate])
+  }, [contentId, contents, navigate])
 
   const handleSubmit = async () => {
     if (!targetCollection) return alert('Please select a folder first!');
-    if (targetCollection.content.some(content=>content._id==contentId)){
-     return alert('content already present in the selected folder!');
+    if (targetCollection.content.some(content => content._id == contentId)) {
+      return alert('content already present in the selected folder!');
     }
     try {
-      if(!content) return;
-      await axios.post(import.meta.env.VITE_BE_DOMAIN+'collection/add',{
-        collectionId:targetCollection._id,
-        content:contentId
-      },{
-        headers:{
-          'Authorization':localStorage.getItem('token')
+      if (!content) return;
+      setLoading(true);
+      await axios.post(import.meta.env.VITE_BE_DOMAIN + 'collection/add', {
+        collectionId: targetCollection._id,
+        content: contentId
+      }, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
         }
       })
-      dispatch(addContentToCollection({collectionId:targetCollection._id,content}));
-      alert('added to '+targetCollection.name);
+      dispatch(addContentToCollection({ collectionId: targetCollection._id, content }));
+      alert('added to ' + targetCollection.name);
+      setLoading(false);
       navigate('/');
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      setLoading(false);
     }
   }
 
@@ -59,7 +63,7 @@ const AddToCollection = () => {
       >Add to Collection</h1>
       <div className=''>
         {/* Card */}
-        <div className={`${content ? ContentBg[content.type]:''}`}>
+        <div className={`${content ? ContentBg[content.type] : ''}`}>
           <div className='flex items-center gap-5 p-5'>
             {content?.type == 'youtube' && <BsYoutube color='red' size={32} />}
             {content?.type == 'tweet' && <BsTwitter color='#1C96E8' size={32} />}
@@ -90,9 +94,10 @@ const AddToCollection = () => {
               )
             })}
           </select>
-          <button onClick={handleSubmit}
+          <button disabled={loading}
+            onClick={handleSubmit}
             className='bg-blue-600 hover:bg-blue-500 cursor-pointer p-1 rounded-md text-white'
-          >Add</button>
+          >{loading ? 'Adding...' : 'Add'}</button>
         </div>
       </div>
     </div>
