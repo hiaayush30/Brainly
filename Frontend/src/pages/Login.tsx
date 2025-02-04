@@ -85,7 +85,7 @@ export default function Login() {
   }
 
   return (
-    <div className='flex min-h-screen justify-center items-center bg-[url("./bg.webp")] bg-cover bg-center'>
+    <div className='flex min-h-screen justify-center items-center bg-[url("./bg.jpeg")] bg-cover bg-center'>
       <div className='absolute top-2 left-2'>
         <h1 className='text-4xl text-white hover:text-blue-600 cursor-pointer transition-all duration-1000'
         >Brainly</h1>
