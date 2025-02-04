@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconProps } from '.'
 
-const AddFolder = (props:IconProps) => {
+const AddFolderIcon = (props:IconProps) => {
     return (
         <svg height={props.height} width={props.width}
         xmlns="http://www.w3.org/2000/svg" fill={props.color} viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={props.className}>
@@ -12,4 +12,4 @@ const AddFolder = (props:IconProps) => {
     )
 }
 
-export default AddFolder
+export default AddFolderIcon

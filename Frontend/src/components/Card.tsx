@@ -1,16 +1,16 @@
-import { FaTwitter } from "react-icons/fa";
+import { FaPlus, FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
 import { BsShare } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { LuBadgeAlert } from "react-icons/lu";
 import { FaLink } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import axios from "axios";
-import { data } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteContent } from "../../redux/features/content/contentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContent } from "../redux/features/content/contentSlice";
+import { RootState } from "../redux/store";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
     id: string;
@@ -22,6 +22,7 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
+    const navigate=useNavigate();
     const dispatch = useDispatch();
     const handleDelete = async () => {
         try {
@@ -58,14 +59,18 @@ const Card = (props: CardProps) => {
                     >{props.title}</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <BsShare title="share" className="hover:scale-110 hover:text-blue-800 transition-all cursor-pointer" />
+                    <FaPlus onClick={()=>navigate('/add/'+props.id)}
+                    title="Add to Collection" className="hover:scale-110 hover:text-blue-800 transition-all cursor-pointer" />
                     <RiDeleteBin6Line onClick={handleDelete}
                         title="delete" className="hover:scale-110 hover:text-red-700 transition-all cursor-pointer" />
                 </div>
             </div>
             <div className="min-h-48 overflow-auto flex justify-center items-center relative">
                 {props.type == 'youtube' &&
-                    <iframe className="w-64" src={getYoutubeEmbedUrl(props.link)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+                    <iframe className="w-64" src={getYoutubeEmbedUrl(props.link)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen>
+                    </iframe>
+                }
+
                 {props.type == 'tweet' && (
                     <div className="w-64 mx-auto max-h-48 overflow-auto">
                         <blockquote className="twitter-tweet" style={{ margin: '12px' }}>
@@ -90,8 +95,14 @@ const Card = (props: CardProps) => {
                     )
                 })}
             </div>
-            <div className="font-light text-sm text-slate-700 p-2">
-                Added on {new Date(props.createdAt).toLocaleString()}
+            <div className="flex items-center justify-between pr-2">
+                <div className="font-light text-sm text-slate-700 p-2">
+                    Added on {new Date(props.createdAt).toLocaleString()}
+                </div>
+                <div onClick={()=>window.open(props.link)}
+                 className="bg-blue-600 hover:bg-blue-500 cursor-pointer rounded-full text-white p-1">
+                    <MdArrowOutward className=""/>
+                </div>
             </div>
         </div>
     )

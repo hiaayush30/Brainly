@@ -21,12 +21,13 @@ export const addCollection = async (req: Request, res: Response): Promise<any> =
                 message: 'duplcate collections cannot exist'
             })
         }
-        await Collection.create({
+        const newCollection = await Collection.create({
             name,
             userId: req.user?._id
         })
         return res.status(201).json({
-            message: 'Collection created successfully'
+            message: 'Collection created successfully',
+            collection: newCollection
         })
     } catch (error) {
         console.log('error in creating collection ' + error)
@@ -37,78 +38,101 @@ export const addCollection = async (req: Request, res: Response): Promise<any> =
 }
 
 const addCollectionSchema = zod.object({
-    collectionId:zod.string(),
-    content:zod.string(),
+    collectionId: zod.string(),
+    content: zod.string(),
 })
-export const addContentToCollection = async (req:Request,res:Response):Promise<any>=>{
+export const addContentToCollection = async (req: Request, res: Response): Promise<any> => {
     const validBody = addCollectionSchema.safeParse(req.body)
-    if(!validBody.success){
+    if (!validBody.success) {
         return res.status(403).json({
-            message:'invalid request',
-            error:validBody.error.format()
+            message: 'invalid request',
+            error: validBody.error.format()
         })
     }
-    const {collectionId,content}= req.body;
+    const { collectionId, content } = req.body;
     try {
         const post = await Content.find({
-            _id:content
+            _id: content
         });
-        if(!post){
+        if (!post) {
             return res.status(400).json({
-                message:'content not found'
+                message: 'content not found'
             })
         }
         const collection = await Collection.findOne({
-            _id:collectionId,
-            userId:req.user?._id
+            _id: collectionId,
+            userId: req.user?._id
         })
-        if(!collection){
+        if (!collection) {
             return res.status(400).json({
-                mesage:'collection not found'
+                mesage: 'collection not found'
             })
         }
         //remove id if already present
-        if(collection.content.some(id=>id.equals(content))){
-            collection.content=collection.content.filter(id=>!id.equals(content))
+        if (collection.content.some(id => id.equals(content))) {
+            collection.content = collection.content.filter(id => !id.equals(content))
             await collection.save();
             return res.status(200).json({
-                message:'content deleted'
+                message: 'content deleted'
             })
-        }else{
+        } else {
             collection.content.push(content);
             await collection.save();
             return res.status(200).json({
-                message:'content added'
+                message: 'content added'
             })
         }
     } catch (error) {
-        console.log('error in adding content to collection: '+error)
+        console.log('error in adding content to collection: ' + error)
         return res.status(500).json({
-            message:'internal server error'
+            message: 'internal server error'
         })
     }
 }
 
-export const getCollection=async(req:Request,res:Response):Promise<any>=>{
+export const getCollection = async (req: Request, res: Response): Promise<any> => {
     try {
-        const collections =await Collection.find({
-            userId:req.user?._id
+        const collections = await Collection.find({
+            userId: req.user?._id
         })
-        .populate({
-            path:'content',
-            populate:[
-                {path:'tags'},
-                {path:'userId',select:'-password'}
-            ]
-        })
+            .populate({
+                path: 'content',
+                populate: [
+                    { path: 'tags' },
+                    { path: 'userId', select: '-password' }
+                ]
+            })
         return res.status(200).json({
-            message:'collections fetched successfully',
+            message: 'collections fetched successfully',
             collections
         })
     } catch (error) {
-        console.log('error in getting collections: '+error)
+        console.log('error in getting collections: ' + error)
         return res.status(500).json({
-            message:'internal server error'
+            message: 'internal server error'
+        })
+    }
+}
+
+export const deleteCollection = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).json({
+            message: 'invalid request'
+        })
+    }
+    try {
+        await Collection.deleteOne({
+            _id: id,
+            userId: req.user?._id
+        })
+        return res.status(200).json({
+            message: 'collection deleted'
+        })
+    } catch (error) {
+        console.log('error in deleting collection ' + error);
+        return res.status(500).json({
+            message: 'internal server error'
         })
     }
 }

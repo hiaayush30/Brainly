@@ -5,6 +5,7 @@ export interface ServiceState {
     darkMode: boolean,
     openAddContent: boolean,
     openShareBrain: boolean,
+    openAddCollection: boolean;
     me: {
         username: string;
     } | null
@@ -14,16 +15,17 @@ const initialState: ServiceState = {
     darkMode: false,
     openAddContent: false,
     openShareBrain: false,
-    me:null
+    me: null,
+    openAddCollection: false,
 }
 
 export const serviceSlice = createSlice({
     name: 'service',
     initialState,
     reducers: {
-        addMeInfo:(state,action:PayloadAction<string>)=>{
-            state.me={
-                username:action.payload
+        addMeInfo: (state, action: PayloadAction<string>) => {
+            state.me = {
+                username: action.payload
             }
         },
         toggleTheme: (state) => {
@@ -33,13 +35,15 @@ export const serviceSlice = createSlice({
             state.openAddContent = action.payload
         },
         toggleShareBrain: (state, action: PayloadAction<boolean>) => {
-            state.openShareBrain = action.payload
+            state.openShareBrain = action.payload;
         },
-
+        toggleAddCollection: (state, action: PayloadAction<boolean>) => {
+            state.openAddCollection = action.payload;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function   
-export const { toggleAddContent, toggleShareBrain, toggleTheme , addMeInfo } = serviceSlice.actions
+export const { toggleAddContent, toggleAddCollection, toggleShareBrain, toggleTheme, addMeInfo } = serviceSlice.actions
 
 export default serviceSlice.reducer

@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { addMeInfo } from './redux/features/service/serviceSlice'
 import Collections from './pages/Collections'
+import Folder from './pages/Folder'
+import AddToCollection from './pages/AddToCollection'
 
 const App = () => {
   const { me } = useSelector((state: RootState) => state.service)
@@ -49,6 +51,8 @@ const App = () => {
           <Route path='links' element={<Links />} />
           <Route path='documents' element={<Documents />} />
           <Route path='collections' element={<Collections />} />
+          <Route path='collections/:collectionId' element={<Folder />} />
+          <Route path='add/:contentId' element={<AddToCollection />} />
         </Route>
         <Route path='*' element={<ErrorPage />} />
       </Routes> : <Routes>

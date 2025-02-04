@@ -1,5 +1,5 @@
 import Header from '../components/AllNotes/Header'
-import Card from '../components/AllNotes/Card'
+import Card from '../components/Card'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'

@@ -8,6 +8,7 @@ import Content from "../models/Content";
 import Tag from "../models/Tag";
 import crypto from 'crypto';
 import Link from "../models/Link";
+import Collection from "../models/Collection";
 
 const signupSchema = zod.object({
     username: zod.string()
@@ -231,6 +232,11 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
             _id: id,
             userId: req.user?._id
         });
+        await Collection.updateMany({content:id},{
+            $pull:{
+                content:id
+            }
+        })
         return res.status(200).json({
             message: 'content deleted'
         })

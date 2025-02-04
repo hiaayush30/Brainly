@@ -29,7 +29,7 @@ export const contentSlice = createSlice({
                 set.add(content._id);
             }) 
             if(set.has(action.payload._id)) return;
-            state.push(action.payload);
+            state.unshift(action.payload);
         },
         setContent:(state,action:PayloadAction<Array<Content>>)=>{
             const set= new Set();
