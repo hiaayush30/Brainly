@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 const Landing = () => {
     const navigate = useNavigate();
     return (
-        <div className='bg-[url(./bg.jpeg)] bg-cover min-h-screen flex flex-col items-center justify-center'>
+        <div style={{backgroundImage:'url("bg.jpeg")'}}
+        className='bg-cover min-h-screen flex flex-col items-center justify-center'>
             <div className='bg-[rgba(0,0,0,0.8)] flex flex-col items-center px-3 rounded-lg'>
                 <h1 className='text-[172px] mb-0 pb-0 text-blue-600'
                 >Bra<span className='text-slate-200'>i</span>nly</h1>
