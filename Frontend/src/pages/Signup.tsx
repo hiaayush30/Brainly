@@ -1,10 +1,10 @@
 import axios from 'axios';
-import  { useState } from 'react';
 import { useForm, Resolver } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { addMeInfo } from '../redux/features/service/serviceSlice';
+import { useState } from 'react';
 
 type FormValues = {
     username: string;
@@ -84,7 +84,8 @@ export default function Signup() {
     }
 
     return (
-        <div className='flex min-h-screen justify-center items-center bg-[url("./bg.jpeg")] bg-cover bg-center'>
+        <div style={{ backgroundImage: 'url("bg.jpeg")' }}
+            className='flex min-h-screen justify-center items-center bg-cover bg-center'>
             <div className='absolute top-2 left-2'>
                 <h1 className='text-4xl text-white hover:text-blue-600 cursor-pointer transition-all duration-1000 '
                 >Brainly</h1>
