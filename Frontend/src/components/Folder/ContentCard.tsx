@@ -45,8 +45,7 @@ const ContentCard = (props: CardProps) => {
         }
     }
     const getYoutubeEmbedUrl = (url: string) => {
-        // const url = "https://www.youtube.com/watch?v=sGbxmsDFVnE";
-        const id = url.split("?v=")[1]; //sGbxmsDFVnE
+        const id = url.split("youtu.be/")[1]; 
         return "https://www.youtube.com/embed/" + id;
     }
 
