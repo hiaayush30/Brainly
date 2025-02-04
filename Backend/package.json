@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc -b",
+    "build": "tsc -b",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts"
   },
@@ -32,6 +32,7 @@
     "@types/node": "^22.10.10",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
     "typescript": "^5.7.3"
   }
 }
