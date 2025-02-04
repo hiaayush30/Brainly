@@ -44,7 +44,7 @@ const Card = (props: CardProps) => {
     const getYoutubeEmbedUrl = (url: string) => {
         // const url = "https://youtu.be/5FQYwKq-VaE?si=cdGh_3C3mbQt4DzK";
         const id = url.split("youtu.be/")[1]; 
-        return "http://www.youtube.com/embed/" + id;
+        return "https://www.youtube.com/embed/" + id;
     }
 
     const getTweetEmbedUrl = (url: string) => {
