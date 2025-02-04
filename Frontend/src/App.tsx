@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { Analytics } from "@vercel/analytics/react"
 import Layout from './Layout'
 import ErrorPage from './pages/ErrorPage'
 import AllNotes from './pages/protected/AllNotes'
