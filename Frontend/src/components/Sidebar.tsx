@@ -72,7 +72,7 @@ const Sidebar = () => {
                 </div>
             </div>
             {/* for mobiles */}
-            <div className="z-10 sm:hidden fixed bottom-0 h-16 bg-blue-200 w-screen flex items-center justify-between px-2">
+            <div className="z-10 sm:hidden fixed bottom-0 h-16 bg-blue-300 opacity-90 w-screen flex items-center justify-between px-2">
             <NavLink to={'/collections'} className={({ isActive }) =>
                         `${isActive ? "text-3xl font-semibold" : "text-2xl "} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
