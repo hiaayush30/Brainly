@@ -32,7 +32,7 @@ const AddCollection = () => {
       setLoading(false);
       dispatch(addCollection(res.data.collection))
       dispatch(toggleAddCollection(false))
-    } catch (error) {
+    } catch (error:any) {
       toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error);
       setLoading(false);

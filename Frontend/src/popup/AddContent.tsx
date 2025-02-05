@@ -49,7 +49,7 @@ const AddContent = () => {
       dispatch(addContent(res.data.content));
       dispatch(toggleAddContent(false));
       setLoading(false);
-    } catch (error) {
+    } catch (error:any) {
       toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error)
       setLoading(false);

@@ -46,8 +46,8 @@ const AddToCollection = () => {
       toast.success('added to ' + targetCollection.name, toastOptions(false));
       setLoading(false);
       navigate('/');
-    } catch (error) {
-      toast.error(error.response?.data?.message, toastOptions(false))
+    } catch (error:any) {
+      toast.error(error?.response?.data?.message, toastOptions(false))
       console.log(error);
       setLoading(false);
     }

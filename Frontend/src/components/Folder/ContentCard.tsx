@@ -41,7 +41,7 @@ const ContentCard = (props: CardProps) => {
             toast.info('Content removed!', toastOptions(false))
             dispatch(removeContentFromCollection({ collectionId: props.collectionId, contentId: props.id }))
             setLoading(false);
-        } catch (error) {
+        } catch (error:any) {
             toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error)
             setLoading(false);

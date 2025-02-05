@@ -4,13 +4,12 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { LuBrain } from "react-icons/lu";
 import { FaGithub, FaLink, FaRegFolderOpen } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { toastOptions } from "../types/toastify";
 
 const Sidebar = () => {
-    const navigate = useNavigate();
     return (
         <>
             <div className='w-[25%] bg-slate-200 relative max-sm:hidden'>

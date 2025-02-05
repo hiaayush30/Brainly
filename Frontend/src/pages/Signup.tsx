@@ -80,7 +80,7 @@ export default function Signup() {
             localStorage.setItem('token', res.data.token)
             dispatch(addMeInfo(res.data.user.username));
             navigate('/');
-        } catch (error) {
+        } catch (error:any) {
             toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error);
         }

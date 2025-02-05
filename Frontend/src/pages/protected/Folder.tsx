@@ -38,7 +38,7 @@ const Folder = () => {
             dispatch(deleteCollection(collectionId));
             setLoading(false);
             navigate('/collections')
-        } catch (error) {
+        } catch (error:any) {
             toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error);
             setLoading(false);
