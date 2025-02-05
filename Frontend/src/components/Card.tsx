@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { deleteContent } from "../redux/features/content/contentSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { toastOptions } from "../types/toastify";
 
 interface CardProps {
     id: string;
@@ -21,11 +23,11 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDelete = async () => {
-        if(loading) return;
+        if (loading) return;
         try {
             setLoading(true);
             await axios.delete(import.meta.env.VITE_BE_DOMAIN + 'content', {
@@ -34,16 +36,18 @@ const Card = (props: CardProps) => {
                     'Authorization': localStorage.getItem('token')
                 }
             })
+            toast.info('Content deleted!', toastOptions(false))
             dispatch(deleteContent(props.id))
             setLoading(false);
-        } catch (error) {
+        } catch (error:any) {
+            toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error)
             setLoading(false);
         }
     }
     const getYoutubeEmbedUrl = (url: string) => {
         // const url = "https://youtu.be/5FQYwKq-VaE?si=cdGh_3C3mbQt4DzK";
-        const id = url.split("youtu.be/")[1]; 
+        const id = url.split("youtu.be/")[1];
         return "https://www.youtube.com/embed/" + id;
     }
 
