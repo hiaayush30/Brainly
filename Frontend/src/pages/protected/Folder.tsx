@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { RootState } from '../../redux/store';
 import { Collection, deleteCollection } from '../../redux/features/collection/collectionSlice';
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdDriveFileRenameOutline } from "react-icons/md";
 import axios from 'axios';
 import ContentCard from '../../components/Folder/ContentCard';
 import { toast } from 'react-toastify';
