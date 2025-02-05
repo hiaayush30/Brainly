@@ -6,6 +6,8 @@ import { LuBrain } from "react-icons/lu";
 import { FaGithub, FaLink, FaRegFolderOpen } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { toastOptions } from "../types/toastify";
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -58,6 +60,8 @@ const Sidebar = () => {
                     </NavLink>
                     <a href="/" onClick={() => {
                         localStorage.removeItem('token');
+                        toast.info('logged out successfully!', toastOptions(false));
+                        window.location.reload();
                     }}
                         className='flex text-red-600 items-center gap-3 m-3 cursor-pointer transition-all'>
                         <IoIosLogOut />
@@ -95,6 +99,7 @@ const Sidebar = () => {
                     </NavLink>
                     <a href="/" onClick={() => {
                         localStorage.removeItem('token');
+                        toast.info('logged out successfully!', toastOptions(false))
                         window.location.reload();
                     }}
                         className='flex text-red-600 text-2xl items-center gap-3 m-3 cursor-pointer transition-all'>

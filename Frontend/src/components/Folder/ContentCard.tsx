@@ -9,6 +9,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeContentFromCollection } from "../../redux/features/collection/collectionSlice";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../types/toastify";
 
 interface CardProps {
     id: string;
@@ -36,10 +38,11 @@ const ContentCard = (props: CardProps) => {
                     'Authorization': localStorage.getItem('token')
                 }
             })
-            alert('content removed')
+            toast.info('Content removed!', toastOptions(false))
             dispatch(removeContentFromCollection({ collectionId: props.collectionId, contentId: props.id }))
             setLoading(false);
         } catch (error) {
+            toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error)
             setLoading(false);
         }

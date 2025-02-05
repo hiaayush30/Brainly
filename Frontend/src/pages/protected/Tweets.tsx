@@ -7,8 +7,9 @@ const Tweets = () => {
   const tweets = content.filter(content=>content.type=='tweet');
   return (
     <div className='w-full'>
-      <h1 className='text-2xl p-5'
+      <h1 className='text-2xl pt-5 px-5 font-semibold'
       >Saved Tweets</h1>
+      <p className='text-slate-600 text-sm px-5'>All your saved tweets at one place!</p>
       <div className='p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
       {tweets.map(content => {
         return <Card key={content._id}

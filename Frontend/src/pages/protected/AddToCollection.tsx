@@ -7,6 +7,8 @@ import { BsLink, BsTwitter, BsYoutube } from 'react-icons/bs';
 import { FcDocument } from 'react-icons/fc';
 import { addContentToCollection, Collection } from '../../redux/features/collection/collectionSlice';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../types/toastify';
 
 const AddToCollection = () => {
   const [loading, setLoading] = useState(false);
@@ -41,10 +43,11 @@ const AddToCollection = () => {
         }
       })
       dispatch(addContentToCollection({ collectionId: targetCollection._id, content }));
-      alert('added to ' + targetCollection.name);
+      toast.success('added to ' + targetCollection.name, toastOptions(false));
       setLoading(false);
       navigate('/');
     } catch (error) {
+      toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error);
       setLoading(false);
     }

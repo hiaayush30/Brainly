@@ -4,6 +4,8 @@ import CloseIcon from '../components/icons/CloseIcon';
 import { toggleAddCollection } from '../redux/features/service/serviceSlice';
 import axios from 'axios';
 import { addCollection } from '../redux/features/collection/collectionSlice';
+import { toastOptions } from '../types/toastify';
+import { toast } from 'react-toastify';
 
 const AddCollection = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +17,7 @@ const AddCollection = () => {
   const handleSubmit = async () => {
     if(!inputRef.current) return;
     if (inputRef.current.value.trim().length < 3 || inputRef.current.value.trim().length >15) {
-      return alert('name should be between 3 and 15 characters!')
+      return toast.info('name should be between 3 and 15 characters!',toastOptions(false))
     }
     setLoading(true);
     try {
@@ -26,11 +28,12 @@ const AddCollection = () => {
           'Authorization': localStorage.getItem('token')
         }
       })
-      console.log(res);
+      toast.success('Collection created!', toastOptions(false))
       setLoading(false);
       dispatch(addCollection(res.data.collection))
       dispatch(toggleAddCollection(false))
     } catch (error) {
+      toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error);
       setLoading(false);
     }

@@ -7,6 +7,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import axios from 'axios';
 import ContentCard from '../../components/Folder/ContentCard';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../types/toastify';
 
 const Folder = () => {
     const { collectionId } = useParams();
@@ -32,10 +34,12 @@ const Folder = () => {
                     'Authorization': localStorage.getItem('token')
                 }
             })
+            toast.success('Collection deleted!', toastOptions(false))
             dispatch(deleteCollection(collectionId));
             setLoading(false);
             navigate('/collections')
         } catch (error) {
+            toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error);
             setLoading(false);
         }

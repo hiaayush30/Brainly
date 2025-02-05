@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { toggleAddContent } from '../redux/features/service/serviceSlice';
 import axios from 'axios';
 import { addContent } from '../redux/features/content/contentSlice';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../types/toastify';
 
 const AddContent = () => {
   const dispatch = useDispatch();
@@ -43,10 +45,12 @@ const AddContent = () => {
           "Authorization": localStorage.getItem('token')
         }
       })
+      toast.success('Content added!', toastOptions(false))
       dispatch(addContent(res.data.content));
       dispatch(toggleAddContent(false));
       setLoading(false);
     } catch (error) {
+      toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error)
       setLoading(false);
     }

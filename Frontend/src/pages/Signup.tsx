@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { addMeInfo } from '../redux/features/service/serviceSlice';
 import { useState } from 'react';
+import { toastOptions } from '../types/toastify';
+import { toast } from 'react-toastify';
 
 type FormValues = {
     username: string;
@@ -74,10 +76,12 @@ export default function Signup() {
             }, {
                 withCredentials: true
             })
+            toast.success('Signed Up successfully!', toastOptions(false))
             localStorage.setItem('token', res.data.token)
             dispatch(addMeInfo(res.data.user.username));
             navigate('/');
         } catch (error) {
+            toast.error(error.response?.data?.message, toastOptions(false))
             console.log(error);
         }
         setFormLoading(false);
