@@ -27,12 +27,12 @@ const Header = () => {
                 </div>
                 <div className="flex gap-5 p-2 max-sm:gap-2">
                     <button onClick={() => dispatch(toggleShareBrain(true))}
-                        className='cursor-pointer hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg'>
+                        className='cursor-pointer max-sm:rounded-full max-sm:p-2 hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg'>
                         <BsShare />
                         <p className="max-sm:hidden">Share Brain</p>
                     </button>
                     <button onClick={() => dispatch(toggleAddContent(true))}
-                        className="cursor-pointer hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg">
+                        className="cursor-pointer max-sm:rounded-full max-sm:p-2 hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg">
                         <FaPlus />
                         <p className="max-sm:hidden">Add Content</p>
                     </button>
