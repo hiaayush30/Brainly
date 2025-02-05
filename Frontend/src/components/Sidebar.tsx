@@ -74,22 +74,22 @@ const Sidebar = () => {
             {/* for mobiles */}
             <div className="z-10 rounded-lg sm:hidden fixed bottom-2 left-3 h-16 bg-blue-300 opacity-90 w-[95%] flex items-center justify-between px-2">
             <NavLink to={'/collections'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl font-semibold" : "text-2xl "} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                        `${isActive ? "text-3xl font-semibold bg-blue-200 p-2 rounded-full" : "text-2xl "} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
                         <FaRegFolderOpen />
                     </NavLink>
                     <NavLink to={'/videos'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                        `${isActive ? "text-3xl font-semibold bg-blue-200 p-2 rounded-full" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
                         <AiOutlineYoutube />
                     </NavLink>
                     <NavLink to={'/'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                        `${isActive ? "text-3xl font-semibold bg-blue-200 p-2 rounded-full" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
                         <FaHome />
                     </NavLink>
                     <NavLink to={'/links'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                        `${isActive ? "text-3xl bg-blue-200 p-2 rounded-full font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
                         <FaLink size={20} />
                     </NavLink>
