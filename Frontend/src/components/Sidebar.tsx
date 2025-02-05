@@ -4,10 +4,11 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { LuBrain } from "react-icons/lu";
 import { FaGithub, FaLink, FaRegFolderOpen } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 
 const Sidebar = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className='w-[25%] bg-slate-200 relative max-sm:hidden'>
@@ -55,14 +56,13 @@ const Sidebar = () => {
                         <IoMdLink />
                         <p>Links</p>
                     </NavLink>
-                    <button onClick={() => {
+                    <a href="/" onClick={() => {
                         localStorage.removeItem('token');
-                        window.location.reload();
                     }}
                         className='flex text-red-600 items-center gap-3 m-3 cursor-pointer transition-all'>
                         <IoIosLogOut />
                         <p>Logout</p>
-                    </button>
+                    </a>
                 </div>
                 <div onClick={() => {
                     window.open('https://github.com/hiaayush30');
@@ -93,13 +93,13 @@ const Sidebar = () => {
                     }>
                         <FaLink size={20} />
                     </NavLink>
-                    <button onClick={() => {
+                    <a href="/" onClick={() => {
                         localStorage.removeItem('token');
                         window.location.reload();
                     }}
                         className='flex text-red-600 text-2xl items-center gap-3 m-3 cursor-pointer transition-all'>
                         <IoIosLogOut />
-                    </button>
+                    </a>
             </div>
         </>
     )

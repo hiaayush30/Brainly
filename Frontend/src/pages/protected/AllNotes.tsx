@@ -11,6 +11,7 @@ const AllNotes = () => {
     const dispatch = useDispatch();
     const content = useSelector((state: RootState) => state.content)
     useEffect(() => {
+        if(!localStorage.getItem('token')) return window.location.reload();
         const fetchContent = async () => {
             try {
                 const res = await axios.get(import.meta.env.VITE_BE_DOMAIN + 'content', {

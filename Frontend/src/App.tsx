@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 import ErrorPage from './pages/ErrorPage'
 import AllNotes from './pages/protected/AllNotes'
@@ -17,6 +17,7 @@ import { addMeInfo } from './redux/features/service/serviceSlice'
 import Collections from './pages/protected/Collections'
 import Folder from './pages/protected/Folder'
 import AddToCollection from './pages/protected/AddToCollection'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
   const { me } = useSelector((state: RootState) => state.service)
@@ -25,14 +26,14 @@ const App = () => {
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
-      if(!token) return;
+      if (!token) return;
       const url = import.meta.env.VITE_BE_DOMAIN + "me";
       try {
-        const response = await axios.get(url, { 
-          headers:{
-            'authorization':token
+        const response = await axios.get(url, {
+          headers: {
+            'authorization': token
           },
-          withCredentials: true 
+          withCredentials: true
         });
         dispatch(addMeInfo(response.data.user.username))
       } catch (error) {
@@ -42,25 +43,28 @@ const App = () => {
     checkAuth();
   }, [dispatch]);
   return (
-    <BrowserRouter>
-      {me ? <Routes>
-        <Route path='/' element={<Layout />} >
-          <Route index element={<AllNotes />} />
-          <Route path='tweets' element={<Tweets />} />
-          <Route path='videos' element={<Videos />} />
-          <Route path='links' element={<Links />} />
-          <Route path='documents' element={<Documents />} />
-          <Route path='collections' element={<Collections />} />
-          <Route path='collections/:collectionId' element={<Folder />} />
-          <Route path='add/:contentId' element={<AddToCollection />} />
-        </Route>
-        <Route path='*' element={<ErrorPage />} />
-      </Routes> : <Routes>
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} />
-        <Route path='*' element={<Landing />} />
-      </Routes>}
-    </BrowserRouter>
+    <>
+    <ToastContainer/>
+      <BrowserRouter>
+        {me ? <Routes>
+          <Route path='/' element={<Layout />} >
+            <Route index element={<AllNotes />} />
+            <Route path='tweets' element={<Tweets />} />
+            <Route path='videos' element={<Videos />} />
+            <Route path='links' element={<Links />} />
+            <Route path='documents' element={<Documents />} />
+            <Route path='collections' element={<Collections />} />
+            <Route path='collections/:collectionId' element={<Folder />} />
+            <Route path='add/:contentId' element={<AddToCollection />} />
+          </Route>
+          <Route path='*' element={<ErrorPage />} />
+        </Routes> : <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='*' element={<Landing />} />
+        </Routes>}
+      </BrowserRouter>
+    </>
   )
 }
 
