@@ -3,7 +3,7 @@ import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { LuBrain } from "react-icons/lu";
-import { FaGithub, FaRegFolderOpen } from "react-icons/fa";
+import { FaGithub, FaLink, FaRegFolderOpen } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 
@@ -91,7 +91,7 @@ const Sidebar = () => {
                     <NavLink to={'/links'} className={({ isActive }) =>
                         `${isActive ? "text-3xl font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
-                        <IoMdLink size={32} />
+                        <FaLink size={20} />
                     </NavLink>
                     <button onClick={() => {
                         localStorage.removeItem('token');
