@@ -49,10 +49,10 @@ const Folder = () => {
             <h1 className='text-4xl p-5'
             >{collection?.name}</h1>
             <div className='absolute top-2 right-2 flex gap-2 items-center'>
-                <button 
+                {/* <button 
                     className='hover:bg-blue-500 cursor-pointer text-white bg-blue-600 p-2 rounded-full'>
                     <MdDriveFileRenameOutline size={24} />
-                </button>
+                </button> */}
                 <button onClick={handleDelete}
                     className='hover:bg-red-500 cursor-pointer text-white bg-red-600 p-2 rounded-full'>
                     <RiDeleteBin6Line size={24} />
