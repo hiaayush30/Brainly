@@ -12,7 +12,7 @@ export interface ServiceState {
 }
 
 const initialState: ServiceState = {
-    darkMode: false,
+    darkMode: true,
     openAddContent: false,
     openShareBrain: false,
     me: null,

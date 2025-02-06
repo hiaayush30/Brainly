@@ -20,7 +20,7 @@ const Sidebar = () => {
         <>
             <div className='dark:bg-slate-800 dark:text-white w-[25%] bg-slate-200 relative max-sm:hidden '>
                 <div className='p-10 flex gap-3'>
-                    <LuBrain className='text-blue-800 text-5xl dark:text-blue-700' />
+                    <LuBrain className='text-blue-800 text-5xl dark:text-blue-600' />
                     <div>
                         <NavLink to={'/'} className={`relative text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500 
                 before:content-[""] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[1px] before:bg-black  dark:before:bg-slate-200
