@@ -3,25 +3,31 @@ import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLink, IoIosLogOut, IoMdLink } from "react-icons/io";
 import { LuBrain } from "react-icons/lu";
-import { FaGithub, FaRegFolderOpen } from "react-icons/fa";
+import { FaGithub, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { toastOptions } from "../types/toastify";
+import { CiLight } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { toggleTheme } from "../redux/features/service/serviceSlice";
 
 const Sidebar = () => {
+    const {darkMode} = useSelector((state:RootState)=>state.service);
+    const dispatch = useDispatch();
     return (
         <>
-            <div className='w-[25%] bg-slate-200 relative max-sm:hidden'>
+            <div className='dark:bg-slate-800 dark:text-white w-[25%] bg-slate-200 relative max-sm:hidden '>
                 <div className='p-10 flex gap-3'>
-                    <LuBrain className='text-blue-800 text-5xl' />
+                    <LuBrain className='text-blue-800 text-5xl dark:text-blue-700' />
                     <div>
                         <NavLink to={'/'} className={`relative text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500 
-                before:content-[""] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[1px] before:bg-black 
+                before:content-[""] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[1px] before:bg-black  dark:before:bg-slate-200
                 hover:before:w-full before:transition-all before:duration-500`}>
                             Brainly
                         </NavLink>
-                        <p className="text-sm text-slate-600 mt-2"
+                        <p className="text-sm text-slate-600 mt-2 dark:text-slate-300"
                         >Your Second Brain</p>
                     </div>
                 </div>
@@ -57,6 +63,11 @@ const Sidebar = () => {
                         <IoMdLink />
                         <p>Links</p>
                     </NavLink>
+                    <button onClick={()=>dispatch(toggleTheme(!darkMode))}
+                    className={'flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all'}>
+                        {darkMode ? <FaRegMoon/>:<CiLight/>}
+                        <p>Theme</p>
+                    </button>
                     <a href="/" onClick={() => {
                         localStorage.removeItem('token');
                         toast.info('logged out successfully!', toastOptions(false));

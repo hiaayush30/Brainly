@@ -30,8 +30,8 @@ const Collections = () => {
     fetchCollections();
   }, [dispatch])
   return (
-    <div className='w-full min-h-screen'>
-      <h1 className='text-center text-2xl m-5 font-semibold'
+    <div className='w-full min-h-screen dark:bg-slate-700 dark:text-slate-200'>
+      <h1 className='text-center text-2xl p-5 font-semibold'
       >Your Collections</h1>
       <p className='text-center'
       >Now you can create collections of related docs, tweets, links etc for better accessibility</p>
@@ -45,7 +45,7 @@ const Collections = () => {
           collection.map(collection => {
             return (
               <div onClick={() => navigate('/collections/'+collection._id)}
-                className='shadow-md hover:shadow-xl hover:scale-105 hover:cursor-pointer mx-auto bg-slate-200 rounded-full m-5 h-40 w-40 flex flex-col justify-center items-center'>
+                className='dark:text-zinc-800 dark:bg-slate-400 shadow-md hover:shadow-xl hover:scale-105 hover:cursor-pointer mx-auto bg-slate-200 rounded-full m-5 h-40 w-40 flex flex-col justify-center items-center'>
                 <IoFolder size={50} color='none' className='text-[#FBB241]' />
                 <div className='mt-2'>{collection.name}</div>
               </div>

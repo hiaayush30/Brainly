@@ -12,7 +12,7 @@ const Header = () => {
     const { openAddContent, openShareBrain } = useSelector((store: RootState) => store.service);
     const dispatch = useDispatch();
     return (
-        <div>
+        <div className="dark:bg-slate-700 dark:text-white">
             <div className="sm:hidden flex justify-center items-center">
                 <LuBrain className='text-blue-800 text-5xl' />
                 <h1 className={`relative text-center m-3 text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500`}
@@ -23,7 +23,7 @@ const Header = () => {
                 <div className="flex items-center gap-3">
                     <h2 className="text-3xl font-medium"
                     >All Notes</h2>
-                    <FaBookBookmark className="text-2xl text-blue-800" />
+                    <FaBookBookmark className="text-2xl dark:text-slate-200 text-blue-800" />
                 </div>
                 <div className="flex gap-5 p-2 max-sm:gap-2">
                     <button onClick={() => dispatch(toggleShareBrain(true))}

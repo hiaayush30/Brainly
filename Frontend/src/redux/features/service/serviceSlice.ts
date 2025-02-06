@@ -28,8 +28,14 @@ export const serviceSlice = createSlice({
                 username: action.payload
             }
         },
-        toggleTheme: (state) => {
-            state.darkMode = !state.darkMode;
+        toggleTheme: (state,action:PayloadAction<boolean>) => {
+            if(action.payload){
+                document.body.classList.add('dark');
+            }else{
+                document.body.classList.remove('dark');
+            }
+            localStorage.setItem('darkMode',JSON.stringify(action.payload));
+            state.darkMode = action.payload;
         },
         toggleAddContent: (state, action: PayloadAction<boolean>) => {
             state.openAddContent = action.payload

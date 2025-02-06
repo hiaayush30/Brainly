@@ -44,8 +44,8 @@ const Folder = () => {
         }
     }
     return (
-        <div>
-            <h1 className='text-4xl p-5'
+        <div className='dark:bg-slate-700 min-h-screen'>
+            <h1 className='text-4xl p-5 dark:text-slate-200'
             >{collection?.name}</h1>
             <div className='absolute top-2 right-2 flex gap-2 items-center'>
                 {/* <button 
@@ -71,8 +71,8 @@ const Folder = () => {
             </div>
             {collection?.content.length == 0 && <div className='text-slate-600 w-full text-center'
             >
-                <div>No Content in this folder!</div>
-                <div className='pt-4'>Click on the + icon of the content you want to add and select your preferred collection</div>
+                <div className='dark:text-slate-200'>No Content in this folder!</div>
+                <div className='pt-4 dark:text-slate-200'>Click on the + icon of the content you want to add and select your preferred collection</div>
                 <button onClick={()=>navigate('/')}
                 className='mt-4 text-white bg-blue-600 p-1 rounded-md hover:bg-blue-500 cursor-pointer'>Add Now!</button>
                 </div>}

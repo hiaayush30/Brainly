@@ -40,17 +40,17 @@ const AddCollection = () => {
   }
   return (
     <div className='z-10 fixed inset-0 bg-[rgba(0,0,0,0.8)] flex justify-center items-center'>
-      <div className='flex flex-col items-center relative p-5 rounded-md bg-slate-200'>
+      <div className='dark:bg-slate-200 flex flex-col items-center relative p-5 rounded-md bg-slate-200'>
         <span onClick={() => dispatch(toggleAddCollection(false))}
           className='hover:bg-slate-800 hover:text-white hover:cursor-pointer absolute top-1 right-1'>
           <CloseIcon height={25} width={25} />
         </span>
-        <h2 className='text-2xl p-2 text-center'
+        <h2 className='text-2xl p-2 text-center dark:text-slate-800'
         >Add New Collection</h2>
         <p className='text-slate-600 text-sm'>Group related content together!</p>
         <div className='my-5 flex flex-col'>
           <label>Name:</label>
-          <input ref={inputRef} className='py-1 outline-none'
+          <input ref={inputRef} className='py-1 outline-none dark:bg-slate-700 px-1 rounded-md dark:text-slate-200'
             type='text' placeholder='New Collection' />
         </div>
         <button onClick={handleSubmit}

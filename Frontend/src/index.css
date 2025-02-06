@@ -2,6 +2,7 @@
 @theme {
   --color-special-700 : #7164c0
 }
+@custom-variant dark (&:where(.dark, .dark *));
 @font-face {
     font-family: 'Poppins';
     src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');

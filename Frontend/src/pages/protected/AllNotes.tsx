@@ -11,7 +11,7 @@ const AllNotes = () => {
     const dispatch = useDispatch();
     const content = useSelector((state: RootState) => state.content)
     useEffect(() => {
-        if(!localStorage.getItem('token')) return window.location.reload();
+        if (!localStorage.getItem('token')) return window.location.reload();
         const fetchContent = async () => {
             try {
                 const res = await axios.get(import.meta.env.VITE_BE_DOMAIN + 'content', {
@@ -48,7 +48,7 @@ const AllNotes = () => {
     return (
         <>
             <Header />
-            <div className='p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
+            <div className='dark:bg-slate-700 min-h-screen p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
                 {content.map(content => {
                     return <Card key={content._id}
                         id={content._id}
@@ -58,9 +58,9 @@ const AllNotes = () => {
                         type={content.type}
                         tags={content.tags.map(tag => tag.title)} />
                 })}
+                {content.length == 0 && <div className='text-slate-600 text-center dark:text-slate-200'
+                >No content added yet !</div>}
             </div>
-            {content.length == 0 && <div className='text-slate-600 text-center'
-            >No content added yet !</div>}
         </>
     )
 }

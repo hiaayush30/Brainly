@@ -57,7 +57,7 @@ const AddContent = () => {
   }
   return (
     <div className='z-10 flex justify-center items-center fixed top-0 bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.8)]'>
-      <div className='relative bg-white text-black md:w-[50%] w-[80%] rounded-md p-5 opacity-100'>
+      <div className='dark:bg-slate-200 relative bg-white text-black md:w-[50%] w-[80%] rounded-md p-5 opacity-100'>
         <div className="flex justify-between items-center p-5">
           <h3 className="font-medium text-2xl"
           >Add Content</h3>
