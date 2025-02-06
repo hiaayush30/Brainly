@@ -1,9 +1,9 @@
 import { FiTwitter } from "react-icons/fi";
 import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { IoIosLink, IoIosLogOut, IoMdLink } from "react-icons/io";
+import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { LuBrain } from "react-icons/lu";
-import { FaGithub, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
+import { FaGithub, FaPlus, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ import { toastOptions } from "../types/toastify";
 import { CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { toggleTheme } from "../redux/features/service/serviceSlice";
+import { toggleAddContent, toggleTheme } from "../redux/features/service/serviceSlice";
 
 const Sidebar = () => {
     const {darkMode} = useSelector((state:RootState)=>state.service);
@@ -65,7 +65,7 @@ const Sidebar = () => {
                     </NavLink>
                     <button onClick={()=>dispatch(toggleTheme(!darkMode))}
                     className={'flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all'}>
-                        {darkMode ? <FaRegMoon/>:<CiLight/>}
+                        {darkMode ? <FaRegMoon/>:<CiLight/>} 
                         <p>Theme</p>
                     </button>
                     <a href="/" onClick={() => {
@@ -92,21 +92,21 @@ const Sidebar = () => {
                     }>
                         <FaRegFolderOpen />
                     </NavLink>
-                    <NavLink to={'/videos'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl font-semibold bg-blue-200 p-2 rounded-full" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                    <button onClick={()=>dispatch(toggleAddContent(true))}
+                    className={'flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold'
                     }>
-                        <AiOutlineYoutube />
-                    </NavLink>
+                        <FaPlus />
+                    </button>
                     <NavLink to={'/'} className={({ isActive }) =>
                         `${isActive ? "text-3xl font-semibold bg-blue-200 p-2 rounded-full" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                     }>
                         <FaHome />
                     </NavLink>
-                    <NavLink to={'/links'} className={({ isActive }) =>
-                        `${isActive ? "text-3xl bg-blue-200 p-2 rounded-full font-semibold" : "text-2xl"} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                    <button onClick={()=>dispatch(toggleTheme(!darkMode))}
+                    className={'flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold'
                     }>
-                        <IoIosLink />
-                    </NavLink>
+                        {darkMode ? <FaRegMoon/>:<CiLight/>}
+                    </button>
                     <a href="/" onClick={() => {
                         localStorage.removeItem('token');
                         toast.info('logged out successfully!', toastOptions(false))

@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import { Analytics } from "@vercel/analytics/react"
 const Layout = () => {
   return (
-    <div className='flex w-screen min-h-screen bg-slate-300'>
+    <div className='flex w-full min-h-screen bg-slate-300'>
       <Sidebar/>
       <div className='max-sm:w-full w-[75%] max-sm:pb-15'>
          <Outlet/>

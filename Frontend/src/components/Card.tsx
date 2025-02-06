@@ -56,7 +56,7 @@ const Card = (props: CardProps) => {
     }
 
     return (
-        <div className="max-sm:max-w-72 w-full rounded-md shadow-md bg-slate-200 mx-auto">
+        <div className="dark:bg-slate-300 max-sm:max-w-72 w-full rounded-md shadow-md bg-slate-200 mx-auto">
             <div className="flex justify-between p-3 items-center">
                 <div className="flex gap-1 items-center">
                     {props.type == 'document' && <IoDocumentTextOutline className="text-2xl" />}

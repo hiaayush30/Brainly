@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleAddContent, toggleShareBrain } from "../../redux/features/service/serviceSlice";
 import { RootState } from "../../redux/store";
 import { LuBrain } from "react-icons/lu";
+import StyledApplyButton from "../Ui/StyledApplyButton";
 
 const Header = () => {
     const { openAddContent, openShareBrain } = useSelector((store: RootState) => store.service);
@@ -18,24 +19,17 @@ const Header = () => {
                 <h1 className={`relative text-center m-3 text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500`}
                 >Brainly</h1>
             </div>
-            <div className="flex w-full justify-between px-10 py-6 items-center">
+            <div className="flex w-full justify-between px-10 py-6 items-center max-sm:justify-center">
                 {/* <RxHamburgerMenu className="absolute top-1 left-1 sm:hidden cursor-pointer text-2xl" /> */}
                 <div className="flex items-center gap-3">
                     <h2 className="text-3xl font-medium"
                     >All Notes</h2>
                     <FaBookBookmark className="text-2xl dark:text-slate-200 text-blue-800" />
                 </div>
-                <div className="flex gap-5 p-2 max-sm:gap-2">
-                    <button onClick={() => dispatch(toggleShareBrain(true))}
-                        className='cursor-pointer max-sm:rounded-full max-sm:p-2 hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg'>
-                        <BsShare />
-                        <p className="max-sm:hidden">Share Brain</p>
-                    </button>
-                    <button onClick={() => dispatch(toggleAddContent(true))}
-                        className="cursor-pointer max-sm:rounded-full max-sm:p-2 hover:bg-blue-500 transition-all flex items-center gap-1 px-2 py-1 bg-blue-700 text-white rounded-lg">
-                        <FaPlus />
-                        <p className="max-sm:hidden">Add Content</p>
-                    </button>
+                <div className="flex gap-5 p-2 max-sm:hidden">
+                    <StyledApplyButton onClick={() => dispatch(toggleShareBrain(true))} icon={<BsShare/>} name="Share Brain" />
+                    <StyledApplyButton onClick={() => dispatch(toggleAddContent(true))}
+                    icon={<FaPlus/>} name="Add Post" />
                 </div>
                 {openShareBrain && <ShareBrain />}
                 {openAddContent && <AddContent />}
