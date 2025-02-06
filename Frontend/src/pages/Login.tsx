@@ -14,7 +14,7 @@ type FormValues = {
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
-  const errors: Record<string, any> = {};
+  const errors: Record<string, {type:string, message:string}> = {};
 
   if (!values.username) {
     errors.username = {
