@@ -46,9 +46,9 @@ const AllNotes = () => {
     }, [dispatch])
 
     return (
-        <div className='min-h-screen'>
+        <>
             <Header />
-            <div className='dark:bg-slate-700 p-5 grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5'>
+            <div className='dark:bg-slate-700 p-5 min-h-screen grid lg:grid-cols-3 grid-cols-2 max-sm:grid-cols-1 gap-5 auto-rows-min'>
                 {content.map(content => {
                     return <Card key={content._id}
                         id={content._id}
@@ -61,7 +61,7 @@ const AllNotes = () => {
                 {content.length == 0 && <div className='text-slate-600 text-center dark:text-slate-200'
                 >No content added yet !</div>}
             </div>
-        </div>
+        </>
     )
 }
 
