@@ -56,7 +56,7 @@ const Card = (props: CardProps) => {
     }
 
     return (
-        <div className="dark:bg-slate-300 max-sm:max-w-72 w-full rounded-md shadow-md bg-slate-200 mx-auto">
+        <div className="relative dark:bg-[#323132] h-80 dark:text-slate-200 w-full rounded-md shadow-md bg-slate-200 mx-auto">
             <div className="flex justify-between p-3 items-center">
                 <div className="flex gap-1 items-center">
                     {props.type == 'document' && <IoDocumentTextOutline className="text-2xl" />}
@@ -111,7 +111,7 @@ const Card = (props: CardProps) => {
                 })}
             </div>
             <div className="flex items-center justify-between pr-2">
-                <div className="font-light text-sm text-slate-700 p-2">
+                <div className="font-light text-sm text-slate-700 p-2 dark:text-slate-300">
                     Added on {new Date(props.createdAt).toLocaleString()}
                 </div>
                 <div onClick={() => window.open(props.link)}
@@ -119,6 +119,7 @@ const Card = (props: CardProps) => {
                     <MdArrowOutward className="" />
                 </div>
             </div>
+            <div className="absolute top-0 left-0 w-36 h-32 border-l-slate-600 dark:border-l-slate-100 dark:border-t-slate-200 border-l-2 border-t-2" />
         </div>
     )
 }
