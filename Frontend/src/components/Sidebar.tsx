@@ -12,7 +12,6 @@ import { CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { toggleAddContent, toggleTheme } from "../redux/features/service/serviceSlice";
-import AddContent from "../popup/AddContent";
 
 const Sidebar = () => {
     const {darkMode} = useSelector((state:RootState)=>state.service);
