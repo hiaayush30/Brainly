@@ -2,7 +2,6 @@ import { BsShare } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import ShareBrain from "../../popup/ShareBrain";
 import { FaBookBookmark } from "react-icons/fa6";
-import AddContent from "../../popup/AddContent";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleAddContent, toggleShareBrain } from "../../redux/features/service/serviceSlice";
 import { RootState } from "../../redux/store";
@@ -10,7 +9,7 @@ import { LuBrain } from "react-icons/lu";
 import StyledApplyButton from "../Ui/StyledApplyButton";
 
 const Header = () => {
-    const { openAddContent, openShareBrain } = useSelector((store: RootState) => store.service);
+    const { openShareBrain } = useSelector((store: RootState) => store.service);
     const dispatch = useDispatch();
     return (
         <div className="dark:bg-slate-700 dark:text-white">
@@ -32,7 +31,6 @@ const Header = () => {
                     icon={<FaPlus/>} name="Add Post" />
                 </div>
                 {openShareBrain && <ShareBrain />}
-                {openAddContent && <AddContent />}
             </div>
         </div>
     )

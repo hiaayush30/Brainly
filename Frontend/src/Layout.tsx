@@ -1,7 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import { Analytics } from "@vercel/analytics/react"
+import { useSelector } from 'react-redux'
+import { RootState } from './redux/store'
+import AddContent from './popup/AddContent'
 const Layout = () => {
+  const {openAddContent} = useSelector((state:RootState)=>state.service);
   return (
     <div className='flex w-full min-h-screen bg-slate-300'>
       <Sidebar/>
@@ -9,6 +13,7 @@ const Layout = () => {
          <Outlet/>
          <Analytics/>
       </div>
+      {openAddContent && <AddContent/>}
     </div>
   )
 }
