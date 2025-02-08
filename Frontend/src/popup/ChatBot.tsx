@@ -39,14 +39,14 @@ const ChatBot = () => {
     return (
         <div className="z-20 fixed right-3 bottom-3 cursor-pointer max-sm:top-3 max-sm:right-3">
             {!openChatBot &&
-                <div className="w-15 h-15 bg-[rgba(0,0,0,0.3)] sm:flex justify-center items-center rounded-xl">
+                <div className="sm:w-15 sm:h-15 bg-[rgba(0,0,0,0.3)] sm:flex justify-center items-center rounded-xl">
                     <div onClick={() => dispatch(toggleChatBot(true))}
                         className="w-10 h-10 bg-slate-800 flex justify-center items-center rounded-full hover:shadow-lg">
                         <IoMdChatbubbles color="white" size={30} />
                     </div>
                 </div>}
             {openChatBot &&
-                <div className="relative max-sm:w-[35vw] max-sm:h-[35vh] w-[20vw] h-[50vh] bg-slate-800">
+                <div className=" rounded-md relative max-sm:w-[35vw] max-sm:h-[35vh] w-[20vw] h-[50vh] bg-slate-800">
                     <button onClick={() => dispatch(toggleChatBot(false))}
                         className="absolute top-[-3] left-[-3] bg-slate-600 hover:bg-slate-800  hover:text-slate-200 text-slate-200 cursor-pointer"
                     ><CloseIcon color="white" height={25} width={25} />
