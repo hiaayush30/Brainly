@@ -4,16 +4,19 @@ import { Analytics } from "@vercel/analytics/react"
 import { useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import AddContent from './popup/AddContent'
+import ChatBot from './popup/ChatBot'
+
 const Layout = () => {
-  const {openAddContent} = useSelector((state:RootState)=>state.service);
+  const { openAddContent } = useSelector((state: RootState) => state.service);
   return (
     <div className='flex w-full min-h-screen bg-slate-300'>
-      <Sidebar/>
+      <ChatBot />
+      <Sidebar />
       <div className='max-sm:w-full w-[75%] max-sm:pb-15'>
-         <Outlet/>
-         <Analytics/>
+        <Outlet />
+        <Analytics />
       </div>
-      {openAddContent && <AddContent/>}
+      {openAddContent && <AddContent />}
     </div>
   )
 }

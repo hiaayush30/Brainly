@@ -8,7 +8,8 @@ export interface ServiceState {
     openAddCollection: boolean;
     me: {
         username: string;
-    } | null
+    } | null;
+    openChatBot:boolean;
 }
 
 const initialState: ServiceState = {
@@ -17,6 +18,7 @@ const initialState: ServiceState = {
     openShareBrain: false,
     me: null,
     openAddCollection: false,
+    openChatBot:false
 }
 
 export const serviceSlice = createSlice({
@@ -46,10 +48,13 @@ export const serviceSlice = createSlice({
         toggleAddCollection: (state, action: PayloadAction<boolean>) => {
             state.openAddCollection = action.payload;
         },
+        toggleChatBot:(state,action:PayloadAction<boolean>)=>{
+            state.openChatBot = action.payload;
+        }
     },
 })
 
 // Action creators are generated for each case reducer function   
-export const { toggleAddContent, toggleAddCollection, toggleShareBrain, toggleTheme, addMeInfo } = serviceSlice.actions
+export const { toggleAddContent, toggleChatBot, toggleAddCollection, toggleShareBrain, toggleTheme, addMeInfo } = serviceSlice.actions
 
 export default serviceSlice.reducer
