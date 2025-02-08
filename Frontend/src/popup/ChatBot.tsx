@@ -58,6 +58,8 @@ const ChatBot = () => {
                                     {val}
                                 </div>
                             })}
+                            {chats.length==0 && 
+                            <div className="text-slate-200 text-center">Brainly AI Chatbot</div>}
                             <div ref={scrollRef} className="h-2"></div>
                         </div>
                         <div className="flex gap-3 items-center w-[18vw]">
