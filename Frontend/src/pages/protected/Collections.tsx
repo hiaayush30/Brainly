@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { IoFolder } from 'react-icons/io5'
 
 const Collections = () => {
+  const {darkMode} = useSelector((state:RootState)=>state.service);
   const { openAddCollection } = useSelector((state: RootState) => state.service)
   const collection = useSelector((state: RootState) => state.collection)
   const dispatch = useDispatch();
@@ -38,15 +39,16 @@ const Collections = () => {
       <div className='grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-5 '>
         <div onClick={() => dispatch(toggleAddCollection(true))}
           className='hover:cursor-pointer rounded-md m-5 min-h-48 flex flex-col justify-center items-center'>
-          <AddFolderIcon color='none' height={80} width={50} className='hover:scale-110' />
+          <AddFolderIcon color = 'none' height={80} width={50} className='hover:scale-110' />
           <div className=''>Add new Collection</div>
         </div>
         {
           collection.map(collection => {
             return (
               <div onClick={() => navigate('/collections/'+collection._id)}
-                className='dark:text-zinc-800 dark:bg-slate-400 shadow-md hover:shadow-xl hover:scale-105 hover:cursor-pointer mx-auto bg-slate-200 rounded-full m-5 h-40 w-40 flex flex-col justify-center items-center'>
-                <IoFolder size={50} color='none' className='text-[#FBB241]' />
+                className='dark:text-zinc-800 dark:bg-slate-300 shadow-md hover:shadow-xl hover:scale-105 hover:cursor-pointer mx-auto bg-slate-200 rounded-full m-5 h-40 w-40 flex flex-col justify-center items-center'>
+                <IoFolder color = {darkMode ? '#1E293B':''} 
+                size={50} className='text-[#FBB241]' />
                 <div className='mt-2'>{collection.name}</div>
               </div>
             )
