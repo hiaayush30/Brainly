@@ -59,7 +59,7 @@ const AddContent = () => {
     <div className='z-10 flex justify-center items-center fixed top-0 bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.8)]'>
       <div className='dark:bg-slate-200 relative bg-white text-black md:w-[50%] w-[80%] rounded-md p-5 opacity-100'>
         <div className="flex justify-between items-center py-5">
-          <h3 className="font-medium text-2xl"
+          <h3 className="bg-blue-300 p-1 w-full rounded-md font-medium text-2xl"
           >Add Content</h3>
           <IoMdClose onClick={() => dispatch(toggleAddContent(false))}
             title="close" className="absolute top-2 right-2 hover:bg-slate-600 hover:text-white hover:scale-110 cursor-pointer transition-all text-xl" />
@@ -103,7 +103,7 @@ const AddContent = () => {
         <button disabled={loading}
           onClick={handleSubmit}
           className='w-full flex justify-center items-center hover:cursor-pointer bg-blue-600 p-1 rounded-md hover:bg-blue-500 text-white mt-3'>
-          <IoAddOutline className='text-xl' /><p>{loading ? 'Adding...' : 'Add'}</p></button>
+          {!loading && <IoAddOutline className='text-xl' />}<p>{loading ? 'Adding...' : 'Add'}</p></button>
       </div>
     </div>
   )

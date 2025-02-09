@@ -45,7 +45,7 @@ const AddCollection = () => {
           className='hover:bg-slate-800 hover:text-white hover:cursor-pointer dark:text-slate-500 absolute top-1 right-1'>
           <CloseIcon height={25} width={25} />
         </span>
-        <h2 className='text-2xl p-2 text-center dark:text-slate-800'
+        <h2 className='text-2xl p-1 m-2 bg-blue-300 w-full rounded-md text-center dark:text-slate-800'
         >Add New Collection</h2>
         <p className='text-slate-600 text-sm'>Group related content together!</p>
         <div className='my-5 flex flex-col'>

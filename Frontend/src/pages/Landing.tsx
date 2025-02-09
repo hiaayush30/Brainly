@@ -20,7 +20,7 @@ const Landing = () => {
                 <motion.h1 
                 initial={{
                     x:0,
-                    y:-50
+                    y:-30
                 }}
                 animate={{
                     opacity:100,
@@ -28,7 +28,7 @@ const Landing = () => {
                     y:0
                 }}
                 transition={{
-                    duration:1.5,
+                    duration:1,
                     ease:'easeInOut'
                 }}
                 className='max-sm:text-[85px] max-lg:text-[142px] max-md:text-[100px] text-[172px] opacity-0 mb-0 pb-0 text-blue-600'
@@ -40,7 +40,7 @@ const Landing = () => {
                 </motion.h1>
                 <motion.p 
                 initial={{
-                    y:-30
+                    y:-20
                 }}
                 animate={{
                     opacity:100,
@@ -48,13 +48,13 @@ const Landing = () => {
                 }}
                 transition={{
                  delay:1,
-                 duration:1
+                 duration:0.7
                 }}
                 className='mb-5 text-lg text-white opacity-0'>Your Second Brain</motion.p>
             </div>
             <motion.div
             initial={{
-                y:-30,
+                y:-20,
                 opacity:0
             }} 
             animate={{
@@ -62,7 +62,7 @@ const Landing = () => {
                 opacity:100
             }}
             transition={{
-                duration:1,
+                duration:0.7,
                 delay:1.5
             }}
             className='max-sm:mt-10 mt-5 flex gap-5'>

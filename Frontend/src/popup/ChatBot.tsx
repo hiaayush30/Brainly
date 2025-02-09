@@ -7,6 +7,7 @@ import { IoMdChatbubbles } from "react-icons/io";
 import axios from "axios";
 
 const ChatBot = () => {
+    const [loading,setLoading] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
     async function askGPT(text: string) {
         try {
@@ -20,8 +21,10 @@ const ChatBot = () => {
             )
             setChats(chats => [...chats, res.data.data]);
             scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
             alert('Chat bot down! please try again later')
         }
     }
@@ -33,6 +36,7 @@ const ChatBot = () => {
         if (text.trim().length == 0) return
         setChats(chats => [...chats, text.trim()]);
         setText('');
+        setLoading(true);
         askGPT(text.trim());
     }
 
@@ -58,6 +62,8 @@ const ChatBot = () => {
                                     {val}
                                 </div>
                             })}
+                            {loading && <div className="my-2 bg-slate-600 text-slate-200 rounded-md px-3"
+                            >. . .</div>}
                             {chats.length==0 && 
                             <div className="text-slate-200 text-center">Brainly AI Chatbot</div>}
                             <div ref={scrollRef} className="h-2"></div>
