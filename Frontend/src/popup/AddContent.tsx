@@ -90,6 +90,10 @@ const AddContent = () => {
               className='md:mx-6 p-1 outline-none'
               type='text' placeholder='https:// . . .' />
           </div>
+          {selectedType == 'youtube' && <>
+                    <div className='text-slate-700 text-sm'>{`Paste the link after clicking on share button (https://youtu.be/9BDeK9VqXA?si=1fypr9516UE_RrS)`}</div>
+                    </>
+                }
           <div className='my-3'>
             <label>Tags:</label>
             <input value={tags} onChange={(e) => setTags(e.target.value.toLowerCase())} className='md:mx-4 p-1 outline-none'
