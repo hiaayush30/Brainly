@@ -1,15 +1,18 @@
 import Header from '../../components/AllNotes/Header'
 import Card from '../../components/Card'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setContent } from '../../redux/features/content/contentSlice'
 import { RootState } from '../../redux/store'
 import { setCollection } from '../../redux/features/collection/collectionSlice'
+import CardSkeleton from '../../components/Ui/CardSkeleton'
+import { toast } from 'react-toastify'
 
 const AllNotes = () => {
     const dispatch = useDispatch();
     const content = useSelector((state: RootState) => state.content)
+    const [fetching, setFetching] = useState(true);
     useEffect(() => {
         if (!localStorage.getItem('token')) return window.location.reload();
         const fetchContent = async () => {
@@ -22,7 +25,10 @@ const AllNotes = () => {
                 })
                 console.log(res.data.content)
                 dispatch(setContent(res.data.content))
+                setFetching(false);
             } catch (error) {
+                setFetching(false);
+                toast.error('Something went wrong!');
                 console.log(error);
             }
         }
@@ -58,6 +64,11 @@ const AllNotes = () => {
                         type={content.type}
                         tags={content.tags.map(tag => tag.title)} />
                 })}
+                {fetching && <>
+                <CardSkeleton/>
+                <CardSkeleton/>
+                <CardSkeleton/>
+                </>}
                 {content.length == 0 && <div className='text-slate-600 text-center dark:text-slate-200'
                 >No content added yet !</div>}
             </div>

@@ -14,7 +14,7 @@ type FormValues = {
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
-  const errors: Record<string, {type:string, message:string}> = {};
+  const errors: Record<string, { type: string, message: string }> = {};
   // const errors : {[key:string]:{type:string, message:string}} ={}
 
   if (!values.username) {
@@ -81,7 +81,7 @@ export default function Login() {
       localStorage.setItem('token', res.data.token);
       dispatch(addMeInfo(res.data.user.username));
       navigate('/');
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error.response?.data?.message, toastOptions(false))
       console.log(error)
     }
@@ -92,7 +92,8 @@ export default function Login() {
     <div style={{ backgroundImage: 'url("bg.jpeg")' }}
       className='flex min-h-screen justify-center items-center bg-cover bg-center'>
       <div className='absolute top-2 left-2'>
-        <h1 className='text-4xl text-white hover:text-blue-600 cursor-pointer transition-all duration-1000'
+        <h1 onClick={() => navigate('/')}
+          className='text-4xl text-white hover:text-blue-600 cursor-pointer transition-all duration-1000'
         >Brainly</h1>
         <p className='text-slate-200 text-sm mt-1'
         >Your Second Brain</p>
