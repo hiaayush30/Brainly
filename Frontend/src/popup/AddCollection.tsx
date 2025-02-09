@@ -39,7 +39,7 @@ const AddCollection = () => {
     }
   }
   return (
-    <div className='z-10 fixed inset-0 bg-[rgba(0,0,0,0.8)] flex justify-center items-center'>
+    <div className='z-20 fixed inset-0 bg-[rgba(0,0,0,0.8)] flex justify-center items-center'>
       <div className='dark:bg-slate-200 flex flex-col items-center relative p-5 rounded-md bg-slate-200'>
         <span onClick={() => dispatch(toggleAddCollection(false))}
           className='hover:bg-slate-800 hover:text-white hover:cursor-pointer dark:text-slate-500 absolute top-1 right-1'>
