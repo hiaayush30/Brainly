@@ -2,7 +2,6 @@ import { FiTwitter } from "react-icons/fi";
 import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
-import { LuBrain } from "react-icons/lu";
 import { FaGithub, FaPlus, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
 import { FaHome } from "react-icons/fa";
@@ -19,8 +18,10 @@ const Sidebar = () => {
     return (
         <>
             <div className='dark:bg-slate-800 dark:text-white w-[25%] bg-slate-200 relative max-sm:hidden '>
-                <div className='p-10 flex gap-3'>
-                    <LuBrain className='text-blue-800 text-5xl dark:text-blue-500' />
+                <div className='p-10 flex items-center'>
+                    {/* <LuBrain className='text-blue-800 text-5xl dark:text-blue-500' /> */}
+                    <img className="w-22 h-22 m-0 p-0" 
+                    src="./logo.png"/>
                     <div>
                         <NavLink to={'/'} className={`relative text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500 
                 before:content-[""] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[1px] before:bg-black  dark:before:bg-slate-200

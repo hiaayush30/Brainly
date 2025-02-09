@@ -5,7 +5,6 @@ import { FaBookBookmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleAddContent, toggleShareBrain } from "../../redux/features/service/serviceSlice";
 import { RootState } from "../../redux/store";
-import { LuBrain } from "react-icons/lu";
 import StyledApplyButton from "../Ui/StyledApplyButton";
 
 const Header = () => {
@@ -14,7 +13,8 @@ const Header = () => {
     return (
         <div className="dark:bg-slate-700 dark:text-white">
             <div className="sm:hidden flex justify-center items-center">
-                <LuBrain className='text-blue-800 text-5xl' />
+            <img className="w-22 h-22 m-0 p-0" 
+                    src="./logo.png"/>
                 <h1 className={`relative text-center m-3 text-3xl font-semibold cursor-pointer hover:scale-105 transition-all duration-500`}
                 >Brainly</h1>
             </div>
