@@ -37,7 +37,7 @@ const ChatBot = () => {
     }
 
     return (
-        <div className="z-20 fixed right-3 bottom-3 cursor-pointer max-sm:top-3 max-sm:right-3">
+        <div className="z-10 fixed right-3 bottom-3 cursor-pointer max-sm:top-3 max-sm:right-3">
             {!openChatBot &&
                 <div className="sm:w-15 sm:h-15 bg-[rgba(0,0,0,0.3)] sm:flex justify-center items-center rounded-xl">
                     <div onClick={() => dispatch(toggleChatBot(true))}
