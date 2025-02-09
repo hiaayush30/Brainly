@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @theme {
-  --color-special-700 : #7164c0
+  --color-special-700 : #7164c0  //text-special-700
 }
 @custom-variant dark (&:where(.dark, .dark *));
 @font-face {

@@ -14,7 +14,7 @@ const Landing = () => {
             }}
             className='h-[1px] bg-slate-200 rounded-md w-full origin-left fixed top-0'></motion.div>
             <div
-            className='min-h-screen max-sm:w-[80vw] w-[40vw] max-sm:bg-[rgba(0,0,0,0.4)] bg-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center'>
+            className='min-h-screen max-sm:w-[80vw] w-[40vw] xl:w-[50vw] lg:w-[60vw] md-[60vw] sm:w-[70vw]  max-sm:bg-[rgba(0,0,0,0.4)] bg-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center'>
             <div 
             className='flex flex-col items-center px-3 rounded-lg'>
                 <motion.h1 
@@ -30,7 +30,7 @@ const Landing = () => {
                     duration:1.5,
                     ease:'easeInOut'
                 }}
-                className='max-sm:text-[85px] text-[172px] opacity-0 mb-0 pb-0 text-blue-600'
+                className='max-sm:text-[85px] max-lg:text-[142px] max-md:text-[100px] text-[172px] opacity-0 mb-0 pb-0 text-blue-600'
                 >
                     Bra
                     <motion.span
