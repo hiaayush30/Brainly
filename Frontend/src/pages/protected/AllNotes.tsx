@@ -69,7 +69,7 @@ const AllNotes = () => {
                 <CardSkeleton/>
                 <CardSkeleton/>
                 </>}
-                {content.length == 0 && <div className='text-slate-600 text-center dark:text-slate-200'
+                {content.length == 0 && fetching==false && <div className='text-slate-600 text-center dark:text-slate-200'
                 >No content added yet !</div>}
             </div>
         </>
