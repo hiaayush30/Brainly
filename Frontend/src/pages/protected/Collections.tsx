@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import AddFolderIcon from '../../components/icons/AddFolderIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { toggleAddCollection } from '../../redux/features/service/serviceSlice'
@@ -8,6 +7,7 @@ import axios from 'axios'
 import { setCollection } from '../../redux/features/collection/collectionSlice'
 import { useNavigate } from 'react-router-dom'
 import { IoFolder } from 'react-icons/io5'
+import AddButton from '../../components/Ui/AddButton'
 
 const Collections = () => {
   const {darkMode} = useSelector((state:RootState)=>state.service);
@@ -37,10 +37,10 @@ const Collections = () => {
       <p className='text-center'
       >Now you can create collections of related docs, tweets, links etc for better accessibility</p>
       <div className='grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-5 '>
-        <div onClick={() => dispatch(toggleAddCollection(true))}
+        <div
           className='hover:cursor-pointer rounded-md m-5 min-h-48 flex flex-col justify-center items-center'>
-          <AddFolderIcon color = 'none' height={80} width={50} className='hover:scale-110' />
-          <div className=''>Add new Collection</div>
+          <AddButton onClick={() => dispatch(toggleAddCollection(true))}/>
+          <div className='mt-5'>Add new Collection</div>
         </div>
         {
           collection.map(collection => {
