@@ -11,7 +11,7 @@ const Layout = () => {
   const { scrollYProgress } = useScroll();
   const { openAddContent } = useSelector((state: RootState) => state.service);
   return (
-    <div className='flex w-full min-h-screen bg-slate-300'>
+    <div className='flex w-full min-h-screen bg-slate-300 dark:bg-slate-700'>
       <motion.div
         style={{
           scaleX: scrollYProgress
