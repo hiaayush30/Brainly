@@ -16,15 +16,16 @@ const Landing = () => {
             <div
             className='min-h-screen max-sm:w-[80vw] w-[40vw] xl:w-[50vw] lg:w-[60vw] md-[60vw] sm:w-[70vw]  max-sm:bg-[rgba(0,0,0,0.4)] bg-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center'>
             <div 
-            className='flex flex-col items-center px-3 rounded-lg'>
+            className='flex flex-col h-[50vh] items-center px-3 rounded-lg'>
                 <motion.h1 
                 initial={{
-                    x:10,
-                    y:0
+                    x:0,
+                    y:-50
                 }}
                 animate={{
                     opacity:100,
-                    x:0
+                    x:0,
+                    y:0
                 }}
                 transition={{
                     duration:1.5,
@@ -38,18 +39,36 @@ const Landing = () => {
                     nly
                 </motion.h1>
                 <motion.p 
+                initial={{
+                    y:-30
+                }}
                 animate={{
-                    opacity:100
+                    opacity:100,
+                    y:0
                 }}
                 transition={{
-                 delay:1
+                 delay:1,
+                 duration:1
                 }}
                 className='mb-5 text-lg text-white opacity-0'>Your Second Brain</motion.p>
             </div>
-            <div className='max-sm:mt-10 mt-5 flex gap-5'>
+            <motion.div
+            initial={{
+                y:-30,
+                opacity:0
+            }} 
+            animate={{
+                y:0,
+                opacity:100
+            }}
+            transition={{
+                duration:1,
+                delay:1.5
+            }}
+            className='max-sm:mt-10 mt-5 flex gap-5'>
                 <StyledButton name='Login' onClick={() => navigate('/login')} />
                 <StyledButton name='Signup' onClick={() => navigate('/signup')} />
-            </div>
+            </motion.div>
             </div>
         </div>
     )
