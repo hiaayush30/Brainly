@@ -62,7 +62,7 @@ const AddToCollection = () => {
 
   return (
     <div>
-      <h1 className='text-center text-3xl p-5'
+      <h1 className='text-center text-3xl p-5 dark:text-slate-200'
       >Add to Collection</h1>
       <div className=''>
         {/* Card */}
@@ -78,13 +78,13 @@ const AddToCollection = () => {
         </div>
         {/* Menu */}
         <div className='w-[95%] mx-auto'>
-          <p className='text-slate-600 pt-5'
+          <p className='text-slate-600 pt-5 dark:text-slate-400'
           >Select collection in which you want to add the above content</p>
           <select onChange={(e) => {
             const folder = collections.find(collection => collection.name == e.target.value);
             setTargetCollection(folder);
           }}
-            className='mt-5 mr-5 outline-none'>
+            className='mt-5 mr-5 outline-none text-slate-700 dark:text-slate-200 dark:bg-slate-600 bg-blue-200 rounded-lg p-1 mx-3'>
             <option value="" disabled selected>
               Select a collection
             </option>
