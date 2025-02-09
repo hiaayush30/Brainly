@@ -64,6 +64,7 @@ const AllNotes = () => {
                         type={content.type}
                         tags={content.tags.map(tag => tag.title)} />
                 })}
+                <CardSkeleton/>
                 {fetching && <>
                 <CardSkeleton/>
                 <CardSkeleton/>
