@@ -1,6 +1,5 @@
 import { FiTwitter } from "react-icons/fi";
 import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
-import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
 import { FaGithub, FaPlus, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -97,7 +96,7 @@ const Sidebar = () => {
                             <p>Videos</p>
                         </NavLink>
                     </motion.div>
-                    <motion.div
+                    {/* <motion.div
                         initial={{
                             x: -20,
                             opacity: 0
@@ -117,7 +116,7 @@ const Sidebar = () => {
                             <IoDocumentTextOutline />
                             <p>Documents</p>
                         </NavLink>
-                    </motion.div>
+                    </motion.div> */}
                     <motion.div
                         initial={{
                             x: -20,
@@ -129,7 +128,7 @@ const Sidebar = () => {
                         }}
                         transition={{
                             duration: 0.2,
-                            delay: 0.4
+                            delay: 0.3
                         }}
                     >
                         <NavLink to={'/links'} className={({ isActive }) =>
@@ -150,7 +149,7 @@ const Sidebar = () => {
                         }}
                         transition={{
                             duration: 0.2,
-                            delay: 0.5
+                            delay: 0.4
                         }}
                     >
                         <button onClick={() => dispatch(toggleTheme(!darkMode))}
@@ -170,7 +169,7 @@ const Sidebar = () => {
                         }}
                         transition={{
                             duration: 0.2,
-                            delay: 0.6
+                            delay: 0.5
                         }}
                     >
                         <a href="/" onClick={() => {

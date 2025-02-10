@@ -73,7 +73,7 @@ const AddContent = () => {
               className="border mx-5 rounded-md cursor-pointer"
             >
               <option value="tweet">tweet</option>
-              <option value="document">document</option>
+              {/* <option value="document">document</option> */}
               <option value="link">link</option>
               <option value="youtube">youtube</option>
             </select>
