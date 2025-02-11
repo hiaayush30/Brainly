@@ -11,15 +11,15 @@ const Layout = () => {
   const { scrollYProgress } = useScroll();
   const { openAddContent } = useSelector((state: RootState) => state.service);
   return (
-    <div className='flex w-full min-h-screen bg-slate-300 dark:bg-slate-700'>
+    <div className='overflow-hidden flex w-full min-h-screen bg-slate-300 dark:bg-slate-700'>
       <motion.div
         style={{
           scaleX: scrollYProgress
         }}
         className='h-1 z-1 dark:bg-slate-200 bg-slate-800 rounded-md w-full origin-left fixed top-0'></motion.div>
       <ChatBot />
-      <Sidebar />
-      <div className='max-sm:w-full w-[75%] max-sm:pb-15'>
+      <Sidebar/>
+      <div className='max-sm:w-full w-[75%] max-sm:pb-15 overflow-y-auto h-screen'>
         <Outlet />
         <Analytics />
       </div>
