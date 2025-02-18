@@ -17,7 +17,7 @@ const Sidebar = () => {
     const dispatch = useDispatch();
     return (
         <>
-            <div className='dark:bg-slate-800 dark:text-white w-[25%] bg-slate-200 relative max-sm:hidden '>
+            <div className='dark:bg-gradient-to-b from-blue-900 to-zinc-800 dark:text-white w-[25%] bg-slate-200 relative max-sm:hidden '>
                 <div className='p-10 flex items-center'>
                     {/* <LuBrain className='text-blue-800 text-5xl dark:text-blue-500' /> */}
                     <img className="w-22 h-22 m-0 p-0"
