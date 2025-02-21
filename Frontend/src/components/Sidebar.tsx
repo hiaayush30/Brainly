@@ -1,7 +1,6 @@
-import { FiTwitter } from "react-icons/fi";
-import { AiFillFire, AiOutlineYoutube } from "react-icons/ai";
+import { AiFillFire } from "react-icons/ai";
 import { IoIosLogOut, IoMdLink } from "react-icons/io";
-import { FaGithub, FaPlus, FaRegFolderOpen, FaRegMoon } from "react-icons/fa";
+import { FaFolderOpen, FaGithub, FaPlus, FaRegFolderOpen, FaRegMoon, FaTwitter, FaYoutube } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -32,7 +31,7 @@ const Sidebar = () => {
                         >Your Second Brain</p>
                     </div>
                 </div>
-                <div className='flex flex-col justify-start items-start px-10 text-xl'>
+                <div className='flex flex-col justify-start items-start px-10 text-2xl'>
                     <motion.div
                         initial={{
                             x: -20,
@@ -47,9 +46,9 @@ const Sidebar = () => {
                         }}
                     >
                         <NavLink to={'/collections'} className={({ isActive }) =>
-                            `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                            `${isActive ? "scale-115 font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                         }>
-                            <FaRegFolderOpen />
+                            <FaFolderOpen className="text-yellow-500"/>
                             <p>Collections</p>
                             <AiFillFire color="red" />
                         </NavLink>
@@ -69,9 +68,9 @@ const Sidebar = () => {
                         }}
                     >
                         <NavLink to={'/tweets'} className={({ isActive }) =>
-                            `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                            `${isActive ? "scale-115 font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                         }>
-                            <FiTwitter />
+                            <FaTwitter className="text-[#1C96E8]" />
                             <p>Tweets</p>
                         </NavLink>
                     </motion.div>
@@ -90,9 +89,9 @@ const Sidebar = () => {
                         }}
                     >
                         <NavLink to={'/videos'} className={({ isActive }) =>
-                            `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                            `${isActive ? "scale-115 font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                         }>
-                            <AiOutlineYoutube />
+                            <FaYoutube className="text-[#FF0033]" />
                             <p>Videos</p>
                         </NavLink>
                     </motion.div>
@@ -132,9 +131,9 @@ const Sidebar = () => {
                         }}
                     >
                         <NavLink to={'/links'} className={({ isActive }) =>
-                            `${isActive ? "text-2xl font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
+                            `${isActive ? "scale-115 font-semibold" : ""} flex items-center gap-3 m-3 cursor-pointer hover:scale-110 transition-all hover:font-semibold`
                         }>
-                            <IoMdLink />
+                            <IoMdLink className="text-blue-500" />
                             <p>Links</p>
                         </NavLink>
                     </motion.div>
